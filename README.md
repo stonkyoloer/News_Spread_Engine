@@ -124,7 +124,7 @@ json{
   - Each ticker must have at least 3 verified data points
   - Prioritize liquid names mentioned across multiple sources
   - If conflicting information found, note it explicitly
-  - Time-stamp all searches to acknowledge data delay
+  - Timestamp all searches to acknowledge data delay
 
 Focus on finding real, verifiable information that suggests directional bias and elevated options activity.
 Quality over quantity - better to have 20 excellent candidates than 27 mediocre ones.
