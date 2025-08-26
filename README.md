@@ -10,166 +10,124 @@ Work in Progress... The script is pulling live market data from tastytrade serve
 
 ---
 
-# 🪐 Define ETF Universe
+# 🪐 Define ETF Universe & 🏆 Screen Tickers for Catalysts
 
-## ▪️ Attach Trading Universe
+## ▪️ Prompt for top 3 tickers/sector.
 
-`XLK` https://www.sectorspdrs.com/mainfund/XLK
-
-`XLC` https://www.sectorspdrs.com/mainfund/XLC
-
-`XLY` https://www.sectorspdrs.com/mainfund/XLY
-
-`XLP` https://www.sectorspdrs.com/mainfund/XLP
-
-`XLV` https://www.sectorspdrs.com/mainfund/XLV
-
-`XLF` https://www.sectorspdrs.com/mainfund/XLF
-
-`XLI` https://www.sectorspdrs.com/mainfund/XLI
-
-`XLE` https://www.sectorspdrs.com/mainfund/XLE
-
-`XLU` https://www.sectorspdrs.com/mainfund/XLU
-
----
-
-# 🏆 Screen Tickers for Catalysts
-
-## ▪️ Prompt for 3 tickers per sector using news/events.
-
-
-### ◽️ GROK 4 (input)
+### ◽️ GROK 4 & GPT 5 (input)
 ```python
-# Prompt
-## Foundation
-1. Lock universe: Sector CSV tickers only; uppercase, dedupe; common stock; prioritize large-cap/index for liquidity/tight spreads (OI >400, volume >100, ATM spread ≤5%, per TradeStation/AlphaArchitect).
-2. Fresh news: ≤7d credible coverage required; prioritize PR/EDGAR/IR/Govt > Tier-1 (Reuters/Bloomberg/WSJ); economic > social; multi-source confirmation +10% edge (MDPI). Skip without.
-3. Prime window: ≤7d with multi-day follow-through preferred; backtests show 15-20% win boost for confirmed trends (arXiv/TradeStation).
-4. Tradable heat: Steady reaction > gaps/halts; avoid ±10% gaps (83% 0DTE loss, TradeStation). Require durable move potential.
-5. Source tiers: PR/EDGAR/IR/Govt > Tier-1; use X semantic/LLM for sentiment verification (positive/negative scale 0-100); multi-source boosts ROC 6% (arXiv).
-6. Earnings guard: Exclude ≤33d; 94% win drop post-vol (TradeStation).
-7. Binaries: FDA/votes/courts/product dates ≤33d → exclude; 70% short DTE failure; use alt-data (e.g., satellite for retail) if available (Berkeley Haas).
-8. Imminent events: ≤24h scheduled → skip; gamma 2x spike (arXiv).
-9. Sector balance: ≤3/sector; high IVR (50%+) for premium; balance bull/bear with macro (e.g., CPI/yields impact financials/energy); don't force.
+# Credit Spread Selection Prompt
 
-## Edge Engine
-
-1. Catalyst hunt: ≤7d; prioritize M&A/guidance/analyst upgrades/FDA/deals/product launches (durable > recency, 6% ROC boost, arXiv); confirm multi-source.
-2. Rank: Durability (multi-day reaction) > Recency > Quality; boost S/R breakouts via X semantic/LLM sentiment (FinBERT-style scoring).
-3. Bias: Bullish (positive sentiment >70) → bull put; Bearish (<30) → bear call; unclear → pass; align with 83-95% wins (arXiv). Use LLM for tone analysis.
-4. Tone: Orderly > hot; theta in 7-33 DTE (85% QQQ 0DTE wins, TradeStation).
-5. Score: High/Med/Low + why/citation; tiebreak: IV tailwind (>50%) or alt-data. Check "priced-in" (e.g., overbought sentiment).
-6. Quant filter: Large-cap/index; 91% win vs 74% (AlphaArchitect); contrarian: Skip if news overbought (e.g., gap without volume).
-
-## Execution
-
-1. Pick: Top ≤3/sector clearing guards; focus low delta (5-10) for credits; AI as assistant (AlphaArchitect).
-2. Flip: Open spread; +10% TP; headline stop; EOD time stop; verify sim.
-3. Table: Sector | Ticker | Bias | Catalyst | Flip Plan | Edge | Sentiment Score (0-100) | Est. ROI | Risks |
-
----------
-
-#Instructions
-
-## Foundation
-
-1. **Free data:** CSV tickers; Google/EDGAR/IR; no APIs/paywalls; X semantic for verification (mdpi.com).
-2. **Confirmation:** Multi-source > solo; X as alert, confirm Tier-1; economic > social (mdpi.com).
-3. **Liquidity:** Large-cap/index; proxy <1% ATM spread (tradestation.com).
-4. **Themes:** Catalyst + sector tailwind/macro; e.g., XLE deals + oil rally (durability +15% ROC, arxiv.org).
-5. **PR:** Guidance/buybacks/contracts > rumors; +15% ROC (alphaarchitect.com).
-6. **Reaction:** Follow-through > pop; S/R wins via article/X context.
-7. **Guards:** Earnings/binaries → drop; scheduled ≤24h → skip.
-8. **Miss:** Uncertain → exclude; public only; add alt-data hints (satellite, haas.berkeley.edu).
-9. **Advisory:** Sizing/fills managed; delta 5-10 edge (83-95% wins, arxiv.org); AI assistant (alphaarchitect.com).
-
-## Edge Engine
-
-1. **Recency:** ≤72h > old; +20% conviction (mdpi.com).
-2. **Themes:** Backtested wins e.g., 94% SPX 0DTE (tradestation.com).
-3. **IV:** High relative >20%; premium edge.
-4. **Heat:** Tradable > chaos; gamma <7 DTE.
-5. **Bias:** Match spread; bull put +ve news; sentiment via X semantic.
-6. **Score:** Transparent; win rate data; what-if risks (arxiv.org).
-
-Execution
-
-1. **Output:** Table; sort score.
-2. **Plan:** +10% TP; headline/time stops.
-3. **Limit:** 3/sector; data exclusions; contrarian filters.
-```
+You are tasked with identifying 27 high-probability credit spread candidates (3 per sector) using only web search and public information analysis.
 
 
-### ◽️ ChatGPT 5 (input)
+# FOUNDATION (9 Core Search Points)
 
-```python
+1. **Sector Holdings Discovery:** Search "[sector ETF] holdings 2025" for XLC, XLY, XLP, XLE, XLF, XLV, XLI, XLK, XLU. Also search "best [sector name] stocks 2025" to find non-SPDR alternatives.
 
-# Master Prompt: News_Spread_Engine (Universe → Catalyst Screen)
+2. **Earnings Calendar Scan:** Search "[ticker] earnings date" and "[ticker] Q3 2025 earnings" to identify and exclude any ticker reporting within 35 days.
 
-You are an eliet AI analyst. Follow every rule exactly. Only use tasks GPT can execute: reading lists, scanning public news/filings, classifying sentiment, and formatting JSON. Do not invent data or use paywalled APIs.
+3. **Recent SEC Filings:** Search "site:sec.gov [ticker] 8-K" for material events in past 7 days. Prioritize stable operational updates over major restructuring.
 
-Foundation Rules:
-1. Universe lock: Use only the attached sector CSV tickers. If none are attached, pull constituents from free ETF issuer sites (SPDR/iShares/Vanguard). Deduplicate. Exclude ETFs/indices.
-2. Recency discipline: Only consider catalysts ≤7 days old; prioritize ≤72h.
-3. Source tiers:
-  First: company PR, SEC/EDGAR, IR/government filings.
-  Then: Tier-1 outlets (Reuters, Bloomberg, WSJ, CNBC, Yahoo Finance).
-  Social/X only as alerts; must confirm with ≥1 credible source.
-4. Event guard: Exclude tickers with credible news showing earnings, FDA/court/vote/product binaries within 33 days, or scheduled in next 24h.
-5. Liquidity proxy: Favor large-cap names; tag smaller/illiquid ones as "filler".
-6. Tone filter: Skip halted/gapped/whipsaw narratives. Favor “orderly drift / follow-through.”
-7. Sector balance: Always return 3 per sector (27 total). If fewer pass, backfill from universe as "filler".
+4. **Institutional Activity:** Search "[ticker] unusual options activity today" and "[ticker] dark pool activity" to identify where smart money is positioning.
 
-Edge Engine:
-1. Sentiment classify: Bullish → "put-credit"; Bearish → "call-credit"; Unclear → "filler".
-2. Confirm: Require ≥2 credible sources per ticker. If only one, mark "Low".
-3. Durability: Rank guidance raises, contracts, buybacks, regulatory approvals > one-off PR/hype.
-4. Thematic tailwind: Add bonus if aligned with sector/macro flow (oil↑ → Energy; yields↓ → Tech; consumer demand↑ → Discretionary).
-5. Score: "High", "Medium", "Low", or "Filler". Tie-break: Durability > Recency > Source quality.
-6. Thesis: Write ≤30 words linking catalyst → bias. Always include 2–3 source links.
+5. **Technical Sentiment:** Search "[ticker] technical analysis" on financial sites to find current RSI readings and trend descriptions (overbought/oversold/neutral).
 
-Execution
-1. Selection: Always exactly 27 tickers (3 per sector). Strongest first, filler last.
-2. Flip plan (standardized): "Open aligned credit spread; +10% TP; headline stop; time stop (EOD/next)."
-3. Output format: JSON only. Schema:
----
-{
-  "Communication Services": {
-    "ETF": "XLC",
-    "Description": "Media, ads, platforms",
-    "Tickers": [
-      {
-        "ticker": "DIS",
-        "bias": "put-credit",
-        "catalyst": "Streaming subscriber growth beat; bullish sentiment",
-        "strength": "High",
-        "sources": ["https://...", "https://..."]
-      },
-      {
-        "ticker": "NFLX",
-        "bias": "call-credit",
-        "catalyst": "Mixed reviews on new pricing; cautious tone",
-        "strength": "Medium",
-        "sources": ["https://...", "https://..."]
-      },
-      {
-        "ticker": "T",
-        "bias": "filler",
-        "catalyst": "No strong catalyst; backfill",
-        "strength": "Filler",
-        "sources": []
-      }
-    ]
-  },
-  "Consumer Discretionary": {
-    "ETF": "XLY",
-    "Description": "Cyclical demand, sentiment",
-    "Tickers": [...]
+6. **Analyst Movement:** Search "[ticker] analyst upgrade downgrade this week" to capture recent institutional sentiment shifts.
+
+7. **Volatility Context:** Search "[ticker] implied volatility" and "[ticker] options volume" to identify elevated premium selling opportunities.
+
+8. **Support/Resistance Mentions:** Search "[ticker] key levels" and "[ticker] support resistance" to find commonly cited price levels from technical analysts.
+
+9. **Comparative Strength:** Search "[ticker] vs [sector ETF] performance" to identify relative outperformers/underperformers within each sector.
+
+
+#PROCESS (6 Execution Steps)
+
+**1. Triple Source Verification:** For each data point, find 3 different sources mentioning similar information. If only 1 source exists, mark as "unverified" in output.
+
+**2. News Recency Scoring:**
+  - Last 24 hours = 3 points
+  - Last 3 days = 2 points
+  - Last 7 days = 1 point
+  - Older = 0 points
+  - Prioritize tickers with score ≥4 from multiple news items
+
+**3. Sentiment Aggregation:** Count bullish vs bearish mentions across all search results:
+  - Strong directional bias (>70% one direction)** = ideal for credit spreads
+  - Mixed sentiment (40-60%)** = avoid
+  - Search terms:** "bullish on [ticker]", "bearish on [ticker]", "[ticker] price target"
+
+**4. Options Activity Validation:** Search "[ticker] put call ratio" and "[ticker] options flow". High put/call ratio (>1.5) suggests bear call setup; low (<0.7) suggests bull put.
+
+**5. Volatility Rank Approximation:** Search "[ticker] IV rank" or "[ticker] implied volatility historical". If current IV mentioned as "elevated" or "above average" in multiple sources, mark as favorable.
+
+**Risk Event Scanning:** Search "[ticker] FDA approval", "[ticker] lawsuit", "[ticker] merger", "[ticker] regulatory". Exclude any ticker with binary events within 45 days.
+
+# OUTPUT (3 Requirements)
+
+**1. Confidence Scoring:
+
+- HIGH (7-9 verified data points found)
+- MEDIUM (4-6 verified data points found)
+- LOW (1-3 verified data points found)
+
+##2. JSON Structure with verifiable data only:
+
+json{
+  "scan_timestamp": "2025-08-25T10:00:00Z",
+  "total_tickers_analyzed": 120,
+  "final_selections": 27,
+  "sectors": {
+    "Communication Services": {
+      "etf": "XLC",
+      "alternatives_checked": ["FCOM", "VOX"],
+      "tickers": [
+        {
+          "symbol": "META",
+          "confidence": "HIGH",
+          "data_points_found": 8,
+          "earnings_days_away": 89,
+          "recent_news_sentiment": "bullish",
+          "analyst_actions": "2 upgrades this week",
+          "options_activity": "unusual call buying detected",
+          "technical_mention": "oversold per 3 sources",
+          "suggested_bias": "bull-put",
+          "sources": ["reuters.com", "benzinga.com", "optionshawk.com"]
+        }
+      ]
+    }
   }
-  // ... repeat for all 9 sectors, 3 tickers each
 }
----
+
+**3. Fallback Protocol:** If cannot find 3 HIGH/MEDIUM confidence tickers in a sector:
+  - First expand to top 10 holdings of sector ETF
+  - Then check competing sector ETFs (iShares, Vanguard)
+  - Finally include best available with "LOW" confidence flag
+  - Never fabricate data - mark as "insufficient_data" if needed
+
+
+
+# SEARCH EXECUTION PATTERNS
+
+**1. For each ticker, execute in this order:**
+  - "[ticker] stock price today" - Verify it's trading
+  - "[ticker] earnings date 2025" - Event avoidance
+  - "[ticker] news this week" - Catalyst check
+  - "[ticker] unusual options activity" - Smart money
+  - "[ticker] analyst rating change" - Institutional view
+  - "[ticker] technical analysis oversold overbought" - Entry timing
+  - "[ticker] implied volatility" - Premium check
+
+# CRITICAL RULES
+  - Never invent data - use "not_found" for missing information
+  - Each ticker must have at least 3 verified data points
+  - Prioritize liquid names mentioned across multiple sources
+  - If conflicting information found, note it explicitly
+  - Time-stamp all searches to acknowledge data delay
+
+Focus on finding real, verifiable information that suggests directional bias and elevated options activity.
+Quality over quantity - better to have 20 excellent candidates than 27 mediocre ones.
 ```
 
 
