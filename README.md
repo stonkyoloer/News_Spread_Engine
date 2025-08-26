@@ -1,6 +1,6 @@
 # 🚀 News & Event Heat 🔥 Credit Spread Screener
 
-Work in Progress... The script is pulling live market data from tastytrade server. GPT 5 and GROK 4 handle news and events.  Need a tool or automation for your project or idea? Hit me up, and I’ll build it from scratch!  
+Work in Progress...  I define 9 sectors. Then GPT 5 and Grok 4 find the top tickers per sector by news and events heat.  The scripts pull live market data from tastytrade server. Then GPT 5 and GROK 4 link news and events to each spread.  Need a tool or automation for your project or idea? Hit me up, and I’ll build it: stuart.alexander.phi@icloud.com  
 
 ---
 
@@ -15,61 +15,44 @@ Work in Progress... The script is pulling live market data from tastytrade serve
 You are tasked with identifying 27 high-probability credit spread candidates (3 per sector) using only web search and public information analysis.
 
 
-# FOUNDATION (9 Core Search Points)
-
+# FOUNDATION (Core Search Points)
 1. **Sector Holdings Discovery:** Search "[sector ETF] holdings 2025" for XLC, XLY, XLP, XLE, XLF, XLV, XLI, XLK, XLU. Also search "best [sector name] stocks 2025" to find non-SPDR alternatives.
-
 2. **Earnings Calendar Scan:** Search "[ticker] earnings date" and "[ticker] Q3 2025 earnings" to identify and exclude any ticker reporting within 35 days.
-
 3. **Recent SEC Filings:** Search "site:sec.gov [ticker] 8-K" for material events in past 7 days. Prioritize stable operational updates over major restructuring.
-
 4. **Institutional Activity:** Search "[ticker] unusual options activity today" and "[ticker] dark pool activity" to identify where smart money is positioning.
-
 5. **Technical Sentiment:** Search "[ticker] technical analysis" on financial sites to find current RSI readings and trend descriptions (overbought/oversold/neutral).
-
 6. **Analyst Movement:** Search "[ticker] analyst upgrade downgrade this week" to capture recent institutional sentiment shifts.
-
 7. **Volatility Context:** Search "[ticker] implied volatility" and "[ticker] options volume" to identify elevated premium selling opportunities.
-
 8. **Support/Resistance Mentions:** Search "[ticker] key levels" and "[ticker] support resistance" to find commonly cited price levels from technical analysts.
-
 9. **Comparative Strength:** Search "[ticker] vs [sector ETF] performance" to identify relative outperformers/underperformers within each sector.
 
 
-#PROCESS (6 Execution Steps)
+#PROCESS (Execution Steps)
 
 **1. Triple Source Verification:** For each data point, find 3 different sources mentioning similar information. If only 1 source exists, mark as "unverified" in output.
-
 **2. News Recency Scoring:**
   - Last 24 hours = 3 points
   - Last 3 days = 2 points
   - Last 7 days = 1 point
   - Older = 0 points
   - Prioritize tickers with score ≥4 from multiple news items
-
 **3. Sentiment Aggregation:** Count bullish vs bearish mentions across all search results:
   - Strong directional bias (>70% one direction)** = ideal for credit spreads
   - Mixed sentiment (40-60%)** = avoid
   - Search terms:** "bullish on [ticker]", "bearish on [ticker]", "[ticker] price target"
-
 **4. Options Activity Validation:** Search "[ticker] put call ratio" and "[ticker] options flow". High put/call ratio (>1.5) suggests bear call setup; low (<0.7) suggests bull put.
-
 **5. Volatility Rank Approximation:** Search "[ticker] IV rank" or "[ticker] implied volatility historical". If current IV mentioned as "elevated" or "above average" in multiple sources, mark as favorable.
-
 **6. Risk Event Scanning:** Search "[ticker] FDA approval", "[ticker] lawsuit", "[ticker] merger", "[ticker] regulatory". Exclude any ticker with binary events within 45 days.
+
 
 # OUTPUT (3 Requirements)
 
 **1. Confidence Scoring:**
-
   - HIGH (7-9 verified data points found)
   - MEDIUM (4-6 verified data points found)
   - LOW (1-3 verified data points found)
-
 **2. Data Outputs:**
-
-## JSON
-
+  - JSON
 {
   "Communication Services": {
     "etf": "XLC",
@@ -118,8 +101,7 @@ You are tasked with identifying 27 high-probability credit spread candidates (3 
   }
 }
 
-
-# Table:**
+  -Table
 
 CREDIT SPREAD ANALYSIS - (todays date)
 
@@ -130,17 +112,14 @@ Communication Services   | TICKER3| HIGH  | 45        | Bearish   | 1 downgrade 
 Consumer Discretionary   | TICKER1| HIGH  | 78        | Bullish   | Price target raised   | Unusual call vol  | Support    | Bull-Put
 [Continue for all 27 tickers...]
 ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-
   - Sources Consulted: [List unique sources used]
   - Data Quality Notes: [Any conflicts or low-confidence items]
   - Risk Events Flagged: [Binary events within 45 days]
-
 **3. Fallback Protocol:** If cannot find 3 HIGH/MEDIUM confidence tickers in a sector:
   - First expand to top 10 holdings of sector ETF
   - Then check competing sector ETFs (iShares, Vanguard)
   - Finally include best available with "LOW" confidence flag
   - Never fabricate data - mark as "insufficient_data" if needed
-
 
 
 # SEARCH EXECUTION PATTERNS
@@ -154,6 +133,7 @@ Consumer Discretionary   | TICKER1| HIGH  | 78        | Bullish   | Price target
   - "[ticker] technical analysis oversold overbought" - Entry timing
   - "[ticker] implied volatility" - Premium check
 
+
 # CRITICAL RULES
 
   - Never invent data - use "not_found" for missing information
@@ -161,9 +141,8 @@ Consumer Discretionary   | TICKER1| HIGH  | 78        | Bullish   | Price target
   - Prioritize liquid names mentioned across multiple sources
   - If conflicting information found, note it explicitly
   - Timestamp all searches to acknowledge data delay
-
-Focus on finding real, verifiable information that suggests directional bias and elevated options activity.
-Quality over quantity - better to have 20 excellent candidates than 27 mediocre ones.
+  - Focus on finding real, verifiable information that suggests directional bias and elevated options activity.
+  - Quality over quantity - better to have 20 excellent candidates than 27 mediocre ones.
 ```
 ---
 
