@@ -120,6 +120,7 @@ json{
   - "[ticker] implied volatility" - Premium check
 
 # CRITICAL RULES
+
   - Never invent data - use "not_found" for missing information
   - Each ticker must have at least 3 verified data points
   - Prioritize liquid names mentioned across multiple sources
