@@ -10,7 +10,7 @@ Work in Progress... The script is pulling live market data from tastytrade serve
 
 ---
 
-# 🪐 Define ETF Universe & 🏆 Screen Tickers for Catalysts
+# 🪐 Define ETF Universe & Screen Tickers for Catalysts 🏆
 
 ## ▪️ Prompt for top 3 tickers/sector.
 
