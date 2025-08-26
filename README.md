@@ -4,12 +4,6 @@ Work in Progress... The script is pulling live market data from tastytrade serve
 
 ---
 
-# 🛠 Set Tastytrade Credentials
-
-**`config.py`** Stores API URL and login credentials, imported and used by other scripts.
-
----
-
 # 🪐 Define ETF Universe & Screen Tickers for Catalysts 🏆
 
 ## ▪️ Prompt for top 3 tickers/sector.
@@ -130,8 +124,13 @@ json{
 Focus on finding real, verifiable information that suggests directional bias and elevated options activity.
 Quality over quantity - better to have 20 excellent candidates than 27 mediocre ones.
 ```
+---
 
+# 🛠 Set Tastytrade Credentials
 
+**`config.py`** Stores API URL and login credentials, imported and used by other scripts.
+
+---
 
 # 🤖 Analyze Credit Spreads via Pipeline
 
@@ -142,39 +141,34 @@ Run `individual steps` or use the `master pipeline`
 ```python
 # Individual steps:
 
+# `sectors.py` Sets tickers for querying.
 python3 sectors.py
-python3 build_universe.py  
+
+# `build_universe.py` Tests tickers for options chains.
+python3 build_universe.py
+
+# `spot.py` Fetches current stock prices for strikes.
 python3 spot.py
+
+# `ticker_ranker.py` Ranks stocks by options liquidity.
 python3 ticker_ranker.py
+
+# `options_chains.py` Downloads option contracts for spreads.
 python3 options_chains.py
+
+# `greeks.py` Gets option prices and Greeks for PoP/ROI.
 python3 greeks.py
+
+# `spread_analyzer.py` Builds spreads, calculates PoP/ROI, picks best.
 python3 spread_analyzer.py
+
 
 # OR run everything at once:
 
 python3 master.py
 ```
----
-
-## ▪️ Definitions:
-
-
-**`sectors.py`** Sets tickers for querying.
-
-**`build_universe.py`** Tests tickers for options chains.
-
-**`spot.py`** Fetches current stock prices for strikes.
-
-**`ticker_ranker.py`** Ranks stocks by options liquidity.
-
-**`options_chains.py`** Downloads option contracts for spreads.
-
-**`greeks.py`** Gets option prices and Greeks for PoP/ROI.
-
-**`spread_analyzer.py`** Builds spreads, calculates PoP/ROI, picks best.
 
 ---
-
 
 
 # 💯 Generate Strategy and Game Plan
