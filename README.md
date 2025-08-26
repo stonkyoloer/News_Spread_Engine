@@ -66,33 +66,76 @@ You are tasked with identifying 27 high-probability credit spread candidates (3 
 - MEDIUM (4-6 verified data points found)
 - LOW (1-3 verified data points found)
 
-##2. JSON Structure with verifiable data only:
+##2. Data Outputs:
 
-json{
-  "scan_timestamp": "2025-08-25T10:00:00Z",
-  "total_tickers_analyzed": 120,
-  "final_selections": 27,
-  "sectors": {
-    "Communication Services": {
-      "etf": "XLC",
-      "alternatives_checked": ["FCOM", "VOX"],
-      "tickers": [
-        {
-          "symbol": "META",
-          "confidence": "HIGH",
-          "data_points_found": 8,
-          "earnings_days_away": 89,
-          "recent_news_sentiment": "bullish",
-          "analyst_actions": "2 upgrades this week",
-          "options_activity": "unusual call buying detected",
-          "technical_mention": "oversold per 3 sources",
-          "suggested_bias": "bull-put",
-          "sources": ["reuters.com", "benzinga.com", "optionshawk.com"]
-        }
-      ]
-    }
+# JSON
+
+{
+  "Communication Services": {
+    "etf": "XLC",
+    "description": "ads, platforms, media",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
+  },
+  "Consumer Discretionary": {
+    "etf": "XLY",
+    "description": "cyclical demand, sentiment",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
+  },
+  "Consumer Staples": {
+    "etf": "XLP",
+    "description": "defensive cashflows, low vol",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
+  },
+  "Energy": {
+    "etf": "XLE",
+    "description": "commodity/inflation shock hedge",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
+  },
+  "Financials": {
+    "etf": "XLF",
+    "description": "rate curve/credit sensitivity",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
+  },
+  "Health Care": {
+    "etf": "XLV",
+    "description": "defensive + policy/innovation mix",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
+  },
+  "Industrials": {
+    "etf": "XLI",
+    "description": "capex, global trade, PMIs",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
+  },
+  "Information Technology": {
+    "etf": "XLK",
+    "description": "growth/innovation beta",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
+  },
+  "Utilities": {
+    "etf": "XLU",
+    "description": "bond-proxy, duration sensitivity",
+    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
   }
 }
+
+
+# Table After providing the JSON, also output this formatted table:
+
+CREDIT SPREAD ANALYSIS - (todays date)
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+SECTOR                    | TICKER | CONF  | EARN_DAYS | SENTIMENT | ANALYST_ACTION        | OPTIONS_FLOW      | TECH_LEVEL | BIAS    
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Communication Services   | TICKER1| HIGH  | 89        | Bullish   | 2 upgrades this week  | Call buying       | Oversold   | Bull-Put
+Communication Services   | TICKER2| MED   | 67        | Neutral   | No change             | Mixed flow        | Neutral    | Hold    
+Communication Services   | TICKER3| HIGH  | 45        | Bearish   | 1 downgrade           | Put volume spike  | Overbought | Bear-Call
+Consumer Discretionary   | TICKER1| HIGH  | 78        | Bullish   | Price target raised   | Unusual call vol  | Support    | Bull-Put
+[Continue for all 27 tickers...]
+═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+Sources Consulted: [List unique sources used]
+Data Quality Notes: [Any conflicts or low-confidence items]
+Risk Events Flagged: [Binary events within 45 days]
 
 **3. Fallback Protocol:** If cannot find 3 HIGH/MEDIUM confidence tickers in a sector:
   - First expand to top 10 holdings of sector ETF
