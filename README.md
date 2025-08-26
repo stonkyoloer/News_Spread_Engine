@@ -60,15 +60,15 @@ You are tasked with identifying 27 high-probability credit spread candidates (3 
 
 # OUTPUT (3 Requirements)
 
-**1. Confidence Scoring:
+**1. Confidence Scoring:**
 
-- HIGH (7-9 verified data points found)
-- MEDIUM (4-6 verified data points found)
-- LOW (1-3 verified data points found)
+  - HIGH (7-9 verified data points found)
+  - MEDIUM (4-6 verified data points found)
+  - LOW (1-3 verified data points found)
 
-##2. Data Outputs:
+**2. Data Outputs:**
 
-# JSON
+## JSON
 
 {
   "Communication Services": {
@@ -119,13 +119,11 @@ You are tasked with identifying 27 high-probability credit spread candidates (3 
 }
 
 
-# Table After providing the JSON, also output this formatted table:
+# Table:**
 
 CREDIT SPREAD ANALYSIS - (todays date)
-═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 SECTOR                    | TICKER | CONF  | EARN_DAYS | SENTIMENT | ANALYST_ACTION        | OPTIONS_FLOW      | TECH_LEVEL | BIAS    
-═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 Communication Services   | TICKER1| HIGH  | 89        | Bullish   | 2 upgrades this week  | Call buying       | Oversold   | Bull-Put
 Communication Services   | TICKER2| MED   | 67        | Neutral   | No change             | Mixed flow        | Neutral    | Hold    
 Communication Services   | TICKER3| HIGH  | 45        | Bearish   | 1 downgrade           | Put volume spike  | Overbought | Bear-Call
@@ -133,9 +131,9 @@ Consumer Discretionary   | TICKER1| HIGH  | 78        | Bullish   | Price target
 [Continue for all 27 tickers...]
 ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 
-Sources Consulted: [List unique sources used]
-Data Quality Notes: [Any conflicts or low-confidence items]
-Risk Events Flagged: [Binary events within 45 days]
+  - Sources Consulted: [List unique sources used]
+  - Data Quality Notes: [Any conflicts or low-confidence items]
+  - Risk Events Flagged: [Binary events within 45 days]
 
 **3. Fallback Protocol:** If cannot find 3 HIGH/MEDIUM confidence tickers in a sector:
   - First expand to top 10 holdings of sector ETF
