@@ -310,8 +310,7 @@ Base_Score = PoP + (ROI_capped × 0.35) + (Distance_Buffer × 8) + DTE_bonus + W
 }
 
 
-**3. Individual Trade Plans:**
-.json
+**3. Build a Individual Trade Plans Table:**
 {
   "ticker": "JPM",
   "trade_summary": "Bear call spread $300/$305, 25 DTE",
