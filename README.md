@@ -1,6 +1,15 @@
 # 🚀 News & Event Heat 🔥 Credit Spread Screener
 
-Work in Progress...  I define 9 sectors. Then GPT 5 and Grok 4 find the top tickers per sector by news and events heat.  The scripts pull live market data from tastytrade server. Then GPT 5 and GROK 4 link news and events to each spread.  Need a tool or automation for your project or idea? Hit me up, and I’ll build it: stuart.alexander.phi@icloud.com  
+Work in Progress...  
+
+1. Start with 9 sectors and scan for catalysts across earnings, filings, flows, sentiment, ratings, volatility, support/resistance, and relative strength. GPT-5 and Grok select the top 3 tickers per sector, 27 tickers total. 
+
+2. Scripts pulls live market data from the tastytrade server, and uses Black-Scholes to get PoP and ROI. 
+
+3. GPT-5 and Grok link news and events to each spread, producing entry and exit plans.
+
+
+**Need a tool or automation for your project? Hit me up, and I’ll build it: stuart.alexander.phi@icloud.com**
 
 ---
 
