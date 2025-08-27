@@ -19,64 +19,58 @@ Work in Progress...
 
 ### ◽️ GROK 4 & ChatGPT 5
 ```python
-Search for recent market events and generate a Python script for a 45-ticker credit spread universe.
+You are a financial markets research assistant.
 
-SEARCH AND VERIFY:
+### Task:
+Search for recent market events, verify data points, and generate a Python script that defines a 45-ticker credit spread universe.
 
-1. EARNINGS MOVERS (past 30 days):
-- Companies that moved >15% on earnings
-- Include exact move percentage and date
-- Verify options are tradeable (weekly expiration exists)
+### Search & Verification Criteria:
+1. **Earnings Movers (past 30 days)**  
+   - Identify companies whose stock price moved by **more than 15%** on earnings.  
+   - For each: report the **exact move percentage and date**.  
+   - Verify that **options are tradeable**, specifically that weekly expirations exist.
 
-2. HIGH IMPLIED VOLATILITY EVENTS (current):
-- FDA decisions (biotech/pharma)
-- Major litigation outcomes pending
-- Regulatory investigations announced
-- M&A rumors or activist investor campaigns
-- Include specific catalyst and expected timeline
+2. **High Implied Volatility Events (current)**  
+   - Look for biotech/pharma **FDA decisions**, **major litigation outcomes**, **regulatory investigations**, **M&A rumors**, or **activist investor campaigns**.  
+   - For each: describe the **specific catalyst** and **expected timeline**.
 
-3. TECHNICAL/MOMENTUM SIGNALS:
-- Stocks breaking 52-week highs/lows this week
-- Stocks with >30% move in past 3 months
-- Major support/resistance breaks reported by financial media
+3. **Technical / Momentum Signals**  
+   - Stocks breaking **52-week highs or lows** this week.  
+   - Stocks with **>30% move in the past 3 months**.  
+   - Any **support/resistance breaks** highlighted in financial media.
 
-4. UNUSUAL OPTIONS FLOW:
-- Verified reports of unusual options activity (>3x normal volume)
-- Large sweep orders reported by FlowAlgo, Unusual Whales, or similar
-- Include source and date of report
+4. **Unusual Options Flow**  
+   - Verified unusual options activity (volume >3× normal).  
+   - Large sweep orders from sources like FlowAlgo, Unusual Whales, etc.  
+   - Include **source** and **report date**.
 
-5. SECTOR ROTATION CANDIDATES:
-- ETFs or stocks mentioned in institutional sector rotation reports
-- New additions to major indices (S&P 500, Nasdaq 100)
-- Recent upgrades/downgrades by major banks creating volatility
+5. **Sector Rotation Candidates**  
+   - ETFs or stocks mentioned in **institutional sector-rotation reports**.  
+   - Companies recently added to **S&P 500** or **Nasdaq 100**.  
+   - Recent **upgrades/downgrades** by major banks that triggered volatility.
 
-6. LIQUIDITY VERIFICATION:
-- For any ticker mentioned, verify it has weekly options
-- Confirm it's not under $5 (penny stock rules)
-- Check for no pending delisting or bankruptcy
+6. **Liquidity & Eligibility Checks**  
+   - Every ticker must have **weekly options**.  
+   - Must not be under $5.  
+   - No pending **delisting** or **bankruptcy**.
 
-Then output ONLY this Python script format:
-
+### Output Format:
 ```python
-# Monthly refresh script - Generated [current date]
-# Search conducted for events from [date range searched]
+# Monthly refresh script – Generated YYYY-MM-DD
+# Search conducted for events from YYYY-MM-DD to YYYY-MM-DD
 
 OPTIMAL_45 = [
-    # Tier 1: Always liquid (15) - Core positions, never remove
+    # Tier 1: Always liquid (15) – Core positions, never remove
     "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
     "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
     
-    # Tier 2: High IV reliables (15) - Replace bottom 3 monthly
-    "COIN", "SQ", "ROKU", "PLTR", "MARA", "PYPL", "UBER", "LYFT",
-    "SNAP", "PINS", "ABNB", "DKNG", "HOOD", "SOFI", "RIVN",
+    # Tier 2: High IV reliables (15) – Replace bottom 3 monthly
+    ...
     
-    # Tier 3: Sector anchors (15) - Replace if M&A or delisting
-    "UNH", "LLY", "CVS", "PFE",     # Healthcare
-    "GS", "MS", "V", "C",            # Financials  
-    "CVX", "COP", "SLB",             # Energy
-    "BA", "CAT", "DE",               # Industrials
-    "WMT"                            # Staples
+    # Tier 3: Sector anchors (15) – Replace on M&A or delisting
+    ...
 ]
+
 ```
 ---
 
