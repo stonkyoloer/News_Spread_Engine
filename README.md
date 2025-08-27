@@ -15,7 +15,7 @@ Work in Progress...
 
 # 🪐 FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
 
-## ▪️  Prompt 1 | Input
+## ▪️  Prompt 1
 
 ### ◽️ Define a 45 Ticker Trading Portfolio | Screen for News and Events 
 
