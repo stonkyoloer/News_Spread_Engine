@@ -1,4 +1,4 @@
-# 🚀 News & Event Heat 🔥 Credit Spread Screener
+# 🚀 ChatGPT 5 vs Grok 4 | Credit Spread Screener 🔥
 
 Work in Progress...  
 
