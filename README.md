@@ -15,9 +15,10 @@ Work in Progress...
 
 # 🪐 Define Universe | Screen Tickers 🏆
 
-## ▪️ Prompt for top 3 tickers/sector.
+## ▪️ Prompt | Grok 4 & ChatGPT 5 
 
-### ◽️ GROK 4 & ChatGPT 5
+### ◽️ Define a 45 ticker trading portfolio
+
 ```python
 You are a financial markets research assistant.
 
