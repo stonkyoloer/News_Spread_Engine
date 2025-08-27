@@ -1,4 +1,4 @@
-# 🚀 GPT5 vs Grok4 | Credit Spread Screener 🔥
+# Credit Spread Screener 
 
 Work in Progress...  
 
@@ -13,11 +13,11 @@ Work in Progress...
 
 ---
 
-# 🪐 Define Universe | Screen Tickers 🏆
+# 🪐 FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
 
-## ▪️ Prompt | Grok 4 & ChatGPT 5 
+## ▪️ Define a 45 Ticker Trading Portfolio  
 
-### ◽️ Define a 45 ticker trading portfolio
+### ◽️ Screen for News and Events 
 
 
 ```python
