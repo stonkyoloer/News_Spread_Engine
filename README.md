@@ -22,7 +22,7 @@ Work in Progress...
 You are a financial markets research assistant.
 
 ### Task:
-Search for recent market events, verify data points, and generate a Python script that defines a 45-ticker credit spread universe.
+Search for recent market events, verify data points, and generate a Python script that defines a 45-ticker credit spread universe with automatic sector allocation.
 
 ### Search & Verification Criteria:
 1. **Earnings Movers (past 30 days)**  
@@ -59,19 +59,86 @@ Search for recent market events, verify data points, and generate a Python scrip
 # Monthly refresh script – Generated YYYY-MM-DD
 # Search conducted for events from YYYY-MM-DD to YYYY-MM-DD
 
-OPTIMAL_45 = [
+OPTIMAL_45_GPT = [
     # Tier 1: Always liquid (15) – Core positions, never remove
     "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
     "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
     
     # Tier 2: High IV reliables (15) – Replace bottom 3 monthly
-    ...
+    "TICKER1", "TICKER2", "TICKER3", "TICKER4", "TICKER5",
+    "TICKER6", "TICKER7", "TICKER8", "TICKER9", "TICKER10",
+    "TICKER11", "TICKER12", "TICKER13", "TICKER14", "TICKER15",
     
     # Tier 3: Sector anchors (15) – Replace on M&A or delisting
-    ...
+    "TICKER16", "TICKER17", "TICKER18", "TICKER19", "TICKER20",
+    "TICKER21", "TICKER22", "TICKER23", "TICKER24", "TICKER25",
+    "TICKER26", "TICKER27", "TICKER28", "TICKER29", "TICKER30"
 ]
 
+OPTIMAL_45_GROK = [
+    # Tier 1: Always liquid (15) – Core positions, never remove
+    "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
+    "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
+    
+    # Tier 2: High IV reliables (15) – Replace bottom 3 monthly
+    "TICKER1", "TICKER2", "TICKER3", "TICKER4", "TICKER5",
+    "TICKER6", "TICKER7", "TICKER8", "TICKER9", "TICKER10",
+    "TICKER11", "TICKER12", "TICKER13", "TICKER14", "TICKER15",
+    
+    # Tier 3: Sector anchors (15) – Replace on M&A or delisting
+    "TICKER16", "TICKER17", "TICKER18", "TICKER19", "TICKER20",
+    "TICKER21", "TICKER22", "TICKER23", "TICKER24", "TICKER25",
+    "TICKER26", "TICKER27", "TICKER28", "TICKER29", "TICKER30"
+]
+
+# AUTOMATIC SECTOR MAPPING - Include ALL new tickers used above
+TICKER_SECTOR_MAP_UPDATE = {
+    # Only include NEW tickers not in base mapping
+    # Base mapping covers: SPY, QQQ, IWM, AAPL, MSFT, NVDA, AMZN, META, GOOGL, TSLA, AMD, NFLX, JPM, BAC, XOM
+    
+    # Add your new tickers here with proper sector classification:
+    "TICKER1": "Information Technology",     # Replace with actual ticker and appropriate sector
+    "TICKER2": "Health Care",                
+    "TICKER3": "Consumer Discretionary",     
+    "TICKER4": "Financials",                 
+    "TICKER5": "Energy",                     
+    "TICKER6": "Communication Services",     
+    "TICKER7": "Industrials",                
+    "TICKER8": "Materials",                  
+    "TICKER9": "Utilities",                  
+    "TICKER10": "Real Estate",               
+    # ... continue for all 30 new tickers
+    
+    # Use these sector classifications:
+    # "Information Technology" - software, hardware, semiconductors, cloud services
+    # "Health Care" - pharma, biotech, medical devices, healthcare services  
+    # "Financials" - banks, insurance, fintech, payment processors, crypto
+    # "Consumer Discretionary" - retail, restaurants, autos, entertainment, travel
+    # "Consumer Staples" - food, beverages, household products, tobacco
+    # "Energy" - oil, gas, renewable energy, energy equipment
+    # "Communication Services" - telecom, media, internet platforms, social media
+    # "Industrials" - aerospace, defense, machinery, transportation, logistics
+    # "Materials" - chemicals, metals, mining, construction materials
+    # "Utilities" - electric, gas, water utilities
+    # "Real Estate" - REITs, real estate services
+    # "ETFs & Indices" - ETFs, index funds, broad market exposure
+}
+
+
+### Research Requirements:
+- Focus on **0-33 DTE credit spreads** with high liquidity requirements
+- Prioritize tickers with **IV percentile >70th percentile** for optimal conditions  
+- Target **20-delta short strikes** for put credit spreads to capture volatility skew premium
+- Ensure **minimum 1M daily share volume** and **weekly options availability**
+- Include brief reasoning for each ticker selection based on the 6 criteria above
+- Verify all tickers have options chains with sufficient depth for credit spreads
+
+### Final Output Should Include:
+1. **Both OPTIMAL_45_GPT and OPTIMAL_45_GROK lists** with actual ticker symbols
+2. **Complete TICKER_SECTOR_MAP_UPDATE** with all 30 new tickers properly classified
+3. **Brief research summary** explaining key findings and ticker selection rationale
 ```
+
 ---
 
 # 🛠 Set Tastytrade Credentials
