@@ -13,7 +13,7 @@ Work in Progress...
 
 ---
 
-# 🪐 Define ETF Universe & Screen Tickers for Catalysts 🏆
+# 🪐 Define ETF Universe | Screen Tickers for Catalysts 🏆
 
 ## ▪️ Prompt for top 3 tickers/sector.
 
