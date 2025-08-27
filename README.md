@@ -17,7 +17,7 @@ Work in Progress...
 
 ## ▪️ Prompt for top 3 tickers/sector.
 
-### ◽️ GROK 4 & ChatGPT 5 (input)
+### ◽️ GROK 4 & ChatGPT 5
 ```python
 # Credit Spread Selection Prompt
 
