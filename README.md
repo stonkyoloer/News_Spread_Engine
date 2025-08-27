@@ -19,61 +19,125 @@ Work in Progress...
 
 ### ◽️ Define a 45 ticker trading portfolio
 
+
 ```python
-You are a financial markets research assistant.
+# FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
+# Task: Generate 45-ticker credit spread universe with automatic sector allocation
+# Focus: Publicly verifiable information only (SEC filings, earnings reports, company announcements)
 
-### Task:
-Search for recent market events, verify data points, and generate a Python script that defines a 45-ticker credit spread universe with automatic sector allocation.
+# =============================================================================
+# RESEARCH CRITERIA - HIGH CONFIDENCE TASKS ONLY
+# =============================================================================
 
-### Search & Verification Criteria:
-1. **Earnings Movers (past 30 days)**  
-   - Identify companies whose stock price moved by **more than 15%** on earnings.  
-   - For each: report the **exact move percentage and date**.  
-   - Verify that **options are tradeable**, specifically that weekly expirations exist.
+RESEARCH_CRITERIA = {
+    "recent_earnings_analysis": {
+        "timeframe": "past_30_days",
+        "focus": [
+            "companies_that_reported_earnings_last_30_days",
+            "revenue_eps_beats_or_misses_from_earnings_releases", 
+            "management_guidance_updates_or_outlook_changes",
+            "quarterly_performance_vs_prior_periods"
+        ],
+        "sources": ["company_earnings_press_releases", "10Q_filings", "investor_presentations"],
+        "verification_required": True
+    },
+    
+    "corporate_development_events": {
+        "focus": [
+            "recent_ma_announcements_spinoffs_major_acquisitions",
+            "new_product_launches_or_market_expansions", 
+            "executive_leadership_changes_ceo_cfo_transitions",
+            "strategic_partnerships_or_major_contract_wins"
+        ],
+        "sources": ["8K_filings", "company_press_releases", "investor_relations_pages"],
+        "verification_required": True
+    },
+    
+    "financial_health_indicators": {
+        "focus": [
+            "companies_with_strong_balance_sheets_low_debt_equity",
+            "consistent_free_cash_flow_generation_past_4_quarters",
+            "revenue_growth_trends_from_quarterly_reports",
+            "market_capitalization_above_1B_for_liquidity"
+        ],
+        "sources": ["10K_filings", "10Q_filings", "financial_statements"],
+        "verification_required": True
+    },
+    
+    "index_changes_and_upgrades": {
+        "focus": [
+            "recent_additions_to_sp500_russell_indices_sector_etfs",
+            "analyst_upgrades_downgrades_major_investment_banks",
+            "credit_rating_changes_moodys_sp_fitch"
+        ],
+        "sources": ["index_provider_announcements", "analyst_research_summaries"],
+        "verification_required": True
+    },
+    
+    "sector_leadership_identification": {
+        "focus": [
+            "companies_with_dominant_market_positions",
+            "high_institutional_ownership_above_70_percent",
+            "consistent_dividend_payments_or_buyback_programs", 
+            "strong_competitive_moats_from_annual_reports"
+        ],
+        "sources": ["proxy_statements", "annual_reports", "industry_analysis"],
+        "verification_required": True
+    }
+}
 
-2. **High Implied Volatility Events (current)**  
-   - Look for biotech/pharma **FDA decisions**, **major litigation outcomes**, **regulatory investigations**, **M&A rumors**, or **activist investor campaigns**.  
-   - For each: describe the **specific catalyst** and **expected timeline**.
+# =============================================================================
+# VERIFICATION REQUIREMENTS - CRITICAL CONSTRAINTS
+# =============================================================================
 
-3. **Technical / Momentum Signals**  
-   - Stocks breaking **52-week highs or lows** this week.  
-   - Stocks with **>30% move in the past 3 months**.  
-   - Any **support/resistance breaks** highlighted in financial media.
+VERIFICATION_REQUIREMENTS = {
+    "basic_eligibility": {
+        "stock_price": "above_20_dollars_per_share",
+        "market_cap": "above_1B_for_liquidity", 
+        "listing_status": "no_pending_bankruptcy_delisting_major_litigation",
+        "exchange": "primary_listing_nyse_or_nasdaq"
+    },
+    "source_verification": ["exchange_listings", "sec_filings", "court_records"],
+    "mandatory_constraints": [
+        "base_analysis_only_on_publicly_available_verifiable_sources",
+        "if_information_cannot_be_confirmed_state_information_not_available",
+        "include_confidence_level_high_medium_low_for_each_selection",
+        "cite_specific_sources_for_all_claims_sec_filing_dates_press_releases"
+    ],
+    "prohibited_claims": [
+        "real_time_stock_prices_or_options_chains",
+        "intraday_trading_volumes_or_technical_indicators", 
+        "proprietary_analyst_price_targets",
+        "forward_looking_earnings_beyond_company_guidance",
+        "insider_trading_activity_or_institutional_flow_data"
+    ]
+}
 
-4. **Unusual Options Flow**  
-   - Verified unusual options activity (volume >3× normal).  
-   - Large sweep orders from sources like FlowAlgo, Unusual Whales, etc.  
-   - Include **source** and **report date**.
+# =============================================================================
+# OUTPUT FORMAT - COPY THIS STRUCTURE EXACTLY
+# =============================================================================
 
-5. **Sector Rotation Candidates**  
-   - ETFs or stocks mentioned in **institutional sector-rotation reports**.  
-   - Companies recently added to **S&P 500** or **Nasdaq 100**.  
-   - Recent **upgrades/downgrades** by major banks that triggered volatility.
-
-6. **Liquidity & Eligibility Checks**  
-   - Every ticker must have **weekly options**.  
-   - Must not be under $5.  
-   - No pending **delisting** or **bankruptcy**.
-
-### Output Format:
-```python
-# Monthly refresh script – Generated YYYY-MM-DD
-# Search conducted for events from YYYY-MM-DD to YYYY-MM-DD
+# Monthly refresh script – Generated [TODAY'S_DATE]
+# Research period: [30_DAYS_AGO] to [TODAY'S_DATE]
 
 OPTIMAL_45_GPT = [
     # Tier 1: Always liquid (15) – Core positions, never remove
     "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
     "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
     
-    # Tier 2: High IV reliables (15) – Replace bottom 3 monthly
-    "TICKER1", "TICKER2", "TICKER3", "TICKER4", "TICKER5",
-    "TICKER6", "TICKER7", "TICKER8", "TICKER9", "TICKER10",
-    "TICKER11", "TICKER12", "TICKER13", "TICKER14", "TICKER15",
+    # Tier 2: Recent earnings/event driven (15) – Monthly rotation based on catalysts
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", 
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", 
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
     
-    # Tier 3: Sector anchors (15) – Replace on M&A or delisting
-    "TICKER16", "TICKER17", "TICKER18", "TICKER19", "TICKER20",
-    "TICKER21", "TICKER22", "TICKER23", "TICKER24", "TICKER25",
-    "TICKER26", "TICKER27", "TICKER28", "TICKER29", "TICKER30"
+    # Tier 3: Sector leaders (15) – Stable positions, change only on major events
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", 
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
+    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER"
 ]
 
 OPTIMAL_45_GROK = [
@@ -81,63 +145,83 @@ OPTIMAL_45_GROK = [
     "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
     "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
     
-    # Tier 2: High IV reliables (15) – Replace bottom 3 monthly
-    "TICKER1", "TICKER2", "TICKER3", "TICKER4", "TICKER5",
-    "TICKER6", "TICKER7", "TICKER8", "TICKER9", "TICKER10",
-    "TICKER11", "TICKER12", "TICKER13", "TICKER14", "TICKER15",
+    # Tier 2: Recent earnings/event driven (15) – Monthly rotation based on catalysts
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", 
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
     
-    # Tier 3: Sector anchors (15) – Replace on M&A or delisting
-    "TICKER16", "TICKER17", "TICKER18", "TICKER19", "TICKER20",
-    "TICKER21", "TICKER22", "TICKER23", "TICKER24", "TICKER25",
-    "TICKER26", "TICKER27", "TICKER28", "TICKER29", "TICKER30"
+    # Tier 3: Sector leaders (15) – Stable positions, change only on major events  
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", 
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
+    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT"
 ]
 
-# AUTOMATIC SECTOR MAPPING - Include ALL new tickers used above
+# AUTOMATIC SECTOR MAPPING - All new tickers with verified classifications
 TICKER_SECTOR_MAP_UPDATE = {
-    # Only include NEW tickers not in base mapping
+    # Only include NEW tickers not in base mapping (exclude Tier 1)
     # Base mapping covers: SPY, QQQ, IWM, AAPL, MSFT, NVDA, AMZN, META, GOOGL, TSLA, AMD, NFLX, JPM, BAC, XOM
     
-    # Add your new tickers here with proper sector classification:
-    "TICKER1": "Information Technology",     # Replace with actual ticker and appropriate sector
-    "TICKER2": "Health Care",                
-    "TICKER3": "Consumer Discretionary",     
-    "TICKER4": "Financials",                 
-    "TICKER5": "Energy",                     
-    "TICKER6": "Communication Services",     
-    "TICKER7": "Industrials",                
-    "TICKER8": "Materials",                  
-    "TICKER9": "Utilities",                  
-    "TICKER10": "Real Estate",               
-    # ... continue for all 30 new tickers
+    "REPLACE_WITH_ACTUAL_TICKER": "Information Technology",     # Based on GICS sector classification
+    "REPLACE_WITH_ACTUAL_TICKER": "Health Care",                # From company 10K business description  
+    "REPLACE_WITH_ACTUAL_TICKER": "Consumer Discretionary",     # Primary revenue source analysis
+    "REPLACE_WITH_ACTUAL_TICKER": "Financials",                 # SIC code verification
+    "REPLACE_WITH_ACTUAL_TICKER": "Energy",                     # Business segment breakdown
+    "REPLACE_WITH_ACTUAL_TICKER": "Communication Services",     # Revenue classification
+    "REPLACE_WITH_ACTUAL_TICKER": "Industrials",                # Primary business operations
+    "REPLACE_WITH_ACTUAL_TICKER": "Materials",                  # Manufacturing/production focus
+    "REPLACE_WITH_ACTUAL_TICKER": "Utilities",                  # Regulated utility operations
+    "REPLACE_WITH_ACTUAL_TICKER": "Consumer Staples",           # Defensive consumer products
+    # Continue for all 30 new tickers with actual symbols and verified sectors
     
-    # Use these sector classifications:
-    # "Information Technology" - software, hardware, semiconductors, cloud services
-    # "Health Care" - pharma, biotech, medical devices, healthcare services  
-    # "Financials" - banks, insurance, fintech, payment processors, crypto
-    # "Consumer Discretionary" - retail, restaurants, autos, entertainment, travel
-    # "Consumer Staples" - food, beverages, household products, tobacco
-    # "Energy" - oil, gas, renewable energy, energy equipment
-    # "Communication Services" - telecom, media, internet platforms, social media
-    # "Industrials" - aerospace, defense, machinery, transportation, logistics
-    # "Materials" - chemicals, metals, mining, construction materials
-    # "Utilities" - electric, gas, water utilities
-    # "Real Estate" - REITs, real estate services
-    # "ETFs & Indices" - ETFs, index funds, broad market exposure
+    # GICS_SECTOR_CLASSIFICATIONS - Use these exact categories:
+    # "Information Technology" - software, semiconductors, hardware, IT services
+    # "Health Care" - pharmaceuticals, biotechnology, medical equipment, healthcare services
+    # "Financials" - banks, insurance, capital markets, fintech, REITs
+    # "Consumer Discretionary" - retail, media, restaurants, automobiles, luxury goods
+    # "Consumer Staples" - food products, beverages, household products, tobacco
+    # "Energy" - oil_gas, renewable energy, energy equipment_services
+    # "Communication Services" - telecommunications, media_entertainment, interactive media
+    # "Industrials" - aerospace, machinery, transportation, construction, defense
+    # "Materials" - chemicals, metals_mining, construction materials, packaging
+    # "Utilities" - electric, gas, water utilities, renewable energy utilities
+    # "Real Estate" - equity REITs, real estate management_development
 }
 
+# =============================================================================
+# RESEARCH DOCUMENTATION REQUIREMENTS
+# =============================================================================
 
-### Research Requirements:
-- Focus on **0-33 DTE credit spreads** with high liquidity requirements
-- Prioritize tickers with **IV percentile >70th percentile** for optimal conditions  
-- Target **20-delta short strikes** for put credit spreads to capture volatility skew premium
-- Ensure **minimum 1M daily share volume** and **weekly options availability**
-- Include brief reasoning for each ticker selection based on the 6 criteria above
-- Verify all tickers have options chains with sufficient depth for credit spreads
+RESEARCH_DOCUMENTATION = {
+    "tier_2_tier_3_selections_must_include": [
+        "ticker_symbol",
+        "selection_rationale", # earnings_beat, index_addition, leadership_position, etc
+        "source_verification", # 10Q_filed_DATE, press_release_DATE, etc  
+        "sector_justification", # primary_revenue_source, GICS_classification, etc
+        "confidence_level" # High, Medium, Low
+    ],
+    "quality_standards": [
+        "all_30_new_tickers_verified_for_basic_eligibility", # above_20_dollars, above_1B_market_cap
+        "sector_allocation_based_on_GICS_classifications_or_SEC_business_descriptions",
+        "research_reasoning_must_cite_specific_verifiable_sources",
+        "gpt_and_grok_selections_differ_by_at_least_10_tickers"
+    ]
+}
 
-### Final Output Should Include:
-1. **Both OPTIMAL_45_GPT and OPTIMAL_45_GROK lists** with actual ticker symbols
-2. **Complete TICKER_SECTOR_MAP_UPDATE** with all 30 new tickers properly classified
-3. **Brief research summary** explaining key findings and ticker selection rationale
+# =============================================================================
+# EXECUTION INSTRUCTIONS
+# =============================================================================
+
+"""
+Replace all REPLACE_WITH_ACTUAL_TICKER placeholders with real ticker symbols.
+Replace all DIFFERENT_SELECTION_FROM_GPT with tickers different from GPT list.
+Include research documentation for each non-Tier-1 selection.
+Verify all sources and include confidence levels.
+Ensure sector mapping uses official GICS classifications.
+"""
 ```
 
 ---
