@@ -19,29 +19,58 @@ Work in Progress...
 
 ### ◽️ GROK 4 & ChatGPT 5
 ```python
-Search for recent high volatility events and generate a Python script for a 45-ticker credit spread universe.
+Search for recent market events and generate a Python script for a 45-ticker credit spread universe.
 
-First, identify:
-1. Stocks that moved >15% on earnings in the past 30 days
-2. Current high volatility events (FDA, lawsuits, regulatory)
-3. Recent IPOs with options trading
-4. Verified unusual options activity
+SEARCH AND VERIFY:
+
+1. EARNINGS MOVERS (past 30 days):
+    - Companies that moved >15% on earnings
+    - Include exact move percentage and date
+    - Verify options are tradeable (weekly expiration exists)
+
+2. HIGH IMPLIED VOLATILITY EVENTS (current):
+    - FDA decisions (biotech/pharma)
+    - Major litigation outcomes pending
+    - Regulatory investigations announced
+    - M&A rumors or activist investor campaigns
+    - Include specific catalyst and expected timeline
+
+3. TECHNICAL/MOMENTUM SIGNALS:
+    - Stocks breaking 52-week highs/lows this week
+    - Stocks with >30% move in past 3 months
+    - Major support/resistance breaks reported by financial media
+
+4. UNUSUAL OPTIONS FLOW:
+    - Verified reports of unusual options activity (>3x normal volume)
+    - Large sweep orders reported by FlowAlgo, Unusual Whales, or similar
+    - Include source and date of report
+
+5. SECTOR ROTATION CANDIDATES:
+    - ETFs or stocks mentioned in institutional sector rotation reports
+    - New additions to major indices (S&P 500, Nasdaq 100)
+    - Recent upgrades/downgrades by major banks creating volatility
+
+6. LIQUIDITY VERIFICATION:
+    - For any ticker mentioned, verify it has weekly options
+    - Confirm it's not under $5 (penny stock rules)
+    - Check for no pending delisting or bankruptcy
 
 Then output ONLY this Python script format:
 
 ```python
 # Monthly refresh script - Generated [current date]
+# Search conducted for events from [date range searched]
 
 OPTIMAL_45 = [
-    # Tier 1: Always liquid (15)
+    # Tier 1: Always liquid (15) - Core positions, never remove
     "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
     "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
     
-    # Tier 2: High IV reliables (15)
+    # Tier 2: High IV reliables (15) - Replace bottom 3 monthly
     "COIN", "SQ", "ROKU", "PLTR", "MARA", "PYPL", "UBER", "LYFT",
     "SNAP", "PINS", "ABNB", "DKNG", "HOOD", "SOFI", "RIVN",
     
-    # Tier 3: Sector anchors (15)
+    # Tier 3: Sector anchors (15) - Replace if M&A or delisting
     "UNH", "LLY", "CVS", "PFE",     # Healthcare
     "GS", "MS", "V", "C",            # Financials  
     "CVX", "COP", "SLB",             # Energy
@@ -51,23 +80,51 @@ OPTIMAL_45 = [
 
 # Recent volatility events found (verify liquidity before adding)
 EVALUATE_FOR_INCLUSION = {
-    # Add any tickers found with format:
-    # "TICKER": {"event": "description", "move": "±X%", "date": "date", "source": "source"},
+    # Earnings movers
+    "TICKER1": {"event": "Earnings beat/miss", "move": "+/-X%", "date": "MMM DD", "source": "Reuters"},
+    
+    # FDA/Regulatory events
+    "TICKER2": {"event": "FDA approval pending", "catalyst_date": "Expected MMM DD", "source": "FDA.gov"},
+    
+    # Technical breaks
+    "TICKER3": {"event": "52-week high break", "move": "+X% (3mo)", "date": "MMM DD", "source": "MarketWatch"},
+    
+    # Unusual options
+    "TICKER4": {"event": "10x normal call volume", "flow": "$XM in calls", "date": "MMM DD", "source": "Unusual Whales"},
+}
+
+# Tickers to remove (found during search)
+REMOVE_CANDIDATES = {
+    # List any current OPTIMAL_45 tickers with issues found
+    # "TICKER": "Reason (pending merger, delisting, bankruptcy, etc.)"
+}
+
+# Market regime context
+MARKET_CONTEXT = {
+    "vix_trend": "Current VIX level and 5-day change if found",
+    "sector_rotation": "Any major sector rotation themes from this week",
+    "earnings_season": "If currently in earnings season",
 }
 
 def monthly_refresh(current_list=OPTIMAL_45):
     """
     Run on first trading day of month
-    1. Test current 45 through TastyTrade API
-    2. Remove any with volume < 5000 or spreads > 10%
-    3. Test candidates from EVALUATE_FOR_INCLUSION
-    4. Replace weakest performers with best new candidates
+    1. Remove any tickers in REMOVE_CANDIDATES
+    2. Test EVALUATE_FOR_INCLUSION through TastyTrade API:
+       - Require min 5000 daily contracts
+       - Require spread < 10% at 20-delta
+       - Require IV percentile > 50
+    3. Replace bottom performers with qualified new candidates
+    4. Never remove Tier 1 core positions
     """
-    return current_list  # Updated after API verification
+    # Implementation connects to TastyTrade API
+    return current_list  # Updated after verification
 
 if __name__ == "__main__":
     refreshed_list = monthly_refresh()
-    print(f"Universe: {len(refreshed_list)} tickers ready for credit spreads")
+    print(f"Universe: {len(refreshed_list)} tickers")
+    print(f"New candidates found: {len(EVALUATE_FOR_INCLUSION)}")
+    print(f"Removal suggested: {len(REMOVE_CANDIDATES)}")
 ```
 ---
 
