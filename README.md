@@ -1,4 +1,4 @@
-# 🚀 ChatGPT 5 vs Grok 4 | Credit Spread Screener 🔥
+# 🚀 GPT5 vs Grok4 | Credit Spread Screener 🔥
 
 Work in Progress...  
 
