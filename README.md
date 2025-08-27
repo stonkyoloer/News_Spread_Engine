@@ -19,139 +19,55 @@ Work in Progress...
 
 ### ◽️ GROK 4 & ChatGPT 5
 ```python
-# Credit Spread Selection Prompt
+Search for recent high volatility events and generate a Python script for a 45-ticker credit spread universe.
 
-You are tasked with identifying 27 high-probability credit spread candidates (3 per sector) using only web search and public information analysis.
+First, identify:
+1. Stocks that moved >15% on earnings in the past 30 days
+2. Current high volatility events (FDA, lawsuits, regulatory)
+3. Recent IPOs with options trading
+4. Verified unusual options activity
 
+Then output ONLY this Python script format:
 
-# FOUNDATION (Core Search Points)
-1. **Sector Holdings Discovery:** Search "[sector ETF] holdings 2025" for XLC, XLY, XLP, XLE, XLF, XLV, XLI, XLK, XLU. Also search "best [sector name] stocks 2025" to find non-SPDR alternatives.
-2. **Earnings Calendar Scan:** Search "[ticker] earnings date" and "[ticker] Q3 2025 earnings" to identify and exclude any ticker reporting within 35 days.
-3. **Recent SEC Filings:** Search "site:sec.gov [ticker] 8-K" for material events in past 7 days. Prioritize stable operational updates over major restructuring.
-4. **Institutional Activity:** Search "[ticker] unusual options activity today" and "[ticker] dark pool activity" to identify where smart money is positioning.
-5. **Technical Sentiment:** Search "[ticker] technical analysis" on financial sites to find current RSI readings and trend descriptions (overbought/oversold/neutral).
-6. **Analyst Movement:** Search "[ticker] analyst upgrade downgrade this week" to capture recent institutional sentiment shifts.
-7. **Volatility Context:** Search "[ticker] implied volatility" and "[ticker] options volume" to identify elevated premium selling opportunities.
-8. **Support/Resistance Mentions:** Search "[ticker] key levels" and "[ticker] support resistance" to find commonly cited price levels from technical analysts.
-9. **Comparative Strength:** Search "[ticker] vs [sector ETF] performance" to identify relative outperformers/underperformers within each sector.
+```python
+# Monthly refresh script - Generated [current date]
 
+OPTIMAL_45 = [
+    # Tier 1: Always liquid (15)
+    "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
+    "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
+    
+    # Tier 2: High IV reliables (15)
+    "COIN", "SQ", "ROKU", "PLTR", "MARA", "PYPL", "UBER", "LYFT",
+    "SNAP", "PINS", "ABNB", "DKNG", "HOOD", "SOFI", "RIVN",
+    
+    # Tier 3: Sector anchors (15)
+    "UNH", "LLY", "CVS", "PFE",     # Healthcare
+    "GS", "MS", "V", "C",            # Financials  
+    "CVX", "COP", "SLB",             # Energy
+    "BA", "CAT", "DE",               # Industrials
+    "WMT"                            # Staples
+]
 
-#PROCESS (Execution Steps)
-
-**1. Triple Source Verification:** For each data point, find 3 different sources mentioning similar information. If only 1 source exists, mark as "unverified" in output.
-**2. News Recency Scoring:**
-  - Last 24 hours = 3 points
-  - Last 3 days = 2 points
-  - Last 7 days = 1 point
-  - Older = 0 points
-  - Prioritize tickers with score ≥4 from multiple news items
-**3. Sentiment Aggregation:** Count bullish vs bearish mentions across all search results:
-  - Strong directional bias (>70% one direction)** = ideal for credit spreads
-  - Mixed sentiment (40-60%)** = avoid
-  - Search terms:** "bullish on [ticker]", "bearish on [ticker]", "[ticker] price target"
-**4. Options Activity Validation:** Search "[ticker] put call ratio" and "[ticker] options flow". High put/call ratio (>1.5) suggests bear call setup; low (<0.7) suggests bull put.
-**5. Volatility Rank Approximation:** Search "[ticker] IV rank" or "[ticker] implied volatility historical". If current IV mentioned as "elevated" or "above average" in multiple sources, mark as favorable.
-**6. Risk Event Scanning:** Search "[ticker] FDA approval", "[ticker] lawsuit", "[ticker] merger", "[ticker] regulatory". Exclude any ticker with binary events within 45 days.
-
-
-# OUTPUT (3 Requirements)
-
-**1. Confidence Scoring:**
-  - HIGH (7-9 verified data points found)
-  - MEDIUM (4-6 verified data points found)
-  - LOW (1-3 verified data points found)
-**2. Data Outputs:**
-  - JSON
-{
-  "Communication Services": {
-    "etf": "XLC",
-    "description": "ads, platforms, media",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  },
-  "Consumer Discretionary": {
-    "etf": "XLY",
-    "description": "cyclical demand, sentiment",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  },
-  "Consumer Staples": {
-    "etf": "XLP",
-    "description": "defensive cashflows, low vol",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  },
-  "Energy": {
-    "etf": "XLE",
-    "description": "commodity/inflation shock hedge",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  },
-  "Financials": {
-    "etf": "XLF",
-    "description": "rate curve/credit sensitivity",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  },
-  "Health Care": {
-    "etf": "XLV",
-    "description": "defensive + policy/innovation mix",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  },
-  "Industrials": {
-    "etf": "XLI",
-    "description": "capex, global trade, PMIs",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  },
-  "Information Technology": {
-    "etf": "XLK",
-    "description": "growth/innovation beta",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  },
-  "Utilities": {
-    "etf": "XLU",
-    "description": "bond-proxy, duration sensitivity",
-    "tickers": ["TICKER1", "TICKER2", "TICKER3"]
-  }
+# Recent volatility events found (verify liquidity before adding)
+EVALUATE_FOR_INCLUSION = {
+    # Add any tickers found with format:
+    # "TICKER": {"event": "description", "move": "±X%", "date": "date", "source": "source"},
 }
 
-  -Table
+def monthly_refresh(current_list=OPTIMAL_45):
+    """
+    Run on first trading day of month
+    1. Test current 45 through TastyTrade API
+    2. Remove any with volume < 5000 or spreads > 10%
+    3. Test candidates from EVALUATE_FOR_INCLUSION
+    4. Replace weakest performers with best new candidates
+    """
+    return current_list  # Updated after API verification
 
-CREDIT SPREAD ANALYSIS - (todays date)
-
-SECTOR                    | TICKER | CONF  | EARN_DAYS | SENTIMENT | ANALYST_ACTION        | OPTIONS_FLOW      | TECH_LEVEL | BIAS    
-Communication Services   | TICKER1| HIGH  | 89        | Bullish   | 2 upgrades this week  | Call buying       | Oversold   | Bull-Put
-Communication Services   | TICKER2| MED   | 67        | Neutral   | No change             | Mixed flow        | Neutral    | Hold    
-Communication Services   | TICKER3| HIGH  | 45        | Bearish   | 1 downgrade           | Put volume spike  | Overbought | Bear-Call
-Consumer Discretionary   | TICKER1| HIGH  | 78        | Bullish   | Price target raised   | Unusual call vol  | Support    | Bull-Put
-[Continue for all 27 tickers...]
-═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-  - Sources Consulted: [List unique sources used]
-  - Data Quality Notes: [Any conflicts or low-confidence items]
-  - Risk Events Flagged: [Binary events within 45 days]
-**3. Fallback Protocol:** If cannot find 3 HIGH/MEDIUM confidence tickers in a sector:
-  - First expand to top 10 holdings of sector ETF
-  - Then check competing sector ETFs (iShares, Vanguard)
-  - Finally include best available with "LOW" confidence flag
-  - Never fabricate data - mark as "insufficient_data" if needed
-
-
-# SEARCH EXECUTION PATTERNS
-
-**1. For each ticker, execute in this order:**
-  - "[ticker] stock price today" - Verify it's trading
-  - "[ticker] earnings date 2025" - Event avoidance
-  - "[ticker] news this week" - Catalyst check
-  - "[ticker] unusual options activity" - Smart money
-  - "[ticker] analyst rating change" - Institutional view
-  - "[ticker] technical analysis oversold overbought" - Entry timing
-  - "[ticker] implied volatility" - Premium check
-
-
-# CRITICAL RULES
-
-  - Never invent data - use "not_found" for missing information
-  - Each ticker must have at least 3 verified data points
-  - Prioritize liquid names mentioned across multiple sources
-  - If conflicting information found, note it explicitly
-  - Timestamp all searches to acknowledge data delay
-  - Focus on finding real, verifiable information that suggests directional bias and elevated options activity.
-  - Quality over quantity - better to have 20 excellent candidates than 27 mediocre ones.
+if __name__ == "__main__":
+    refreshed_list = monthly_refresh()
+    print(f"Universe: {len(refreshed_list)} tickers ready for credit spreads")
 ```
 ---
 
