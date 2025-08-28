@@ -20,251 +20,126 @@ Work in Progress...
 
 ```python
 # FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
-# Task: Generate 45-ticker credit spread universe with automatic sector allocation
-# Focus: Publicly verifiable information only (SEC filings, earnings reports, company announcements)
 
-# =============================================================================
-# RESEARCH CRITERIA - HIGH CONFIDENCE TASKS ONLY
-# =============================================================================
+**Task:** Generate 45-ticker credit spread universe with automatic sector allocation  
+**Focus:** Publicly verifiable information only (SEC filings, earnings reports, company announcements)
 
-RESEARCH_CRITERIA = {
-    "recent_earnings_analysis": {
-        "timeframe": "past_30_days",
-        "focus": [
-            "companies_that_reported_earnings_last_30_days",
-            "revenue_eps_beats_or_misses_from_earnings_releases", 
-            "management_guidance_updates_or_outlook_changes",
-            "quarterly_performance_vs_prior_periods"
-        ],
-        "sources": ["company_earnings_press_releases", "10Q_filings", "investor_presentations"],
-        "verification_required": True
-    },
-    
-    "corporate_development_events": {
-        "focus": [
-            "recent_ma_announcements_spinoffs_major_acquisitions",
-            "new_product_launches_or_market_expansions", 
-            "executive_leadership_changes_ceo_cfo_transitions",
-            "strategic_partnerships_or_major_contract_wins"
-        ],
-        "sources": ["8K_filings", "company_press_releases", "investor_relations_pages"],
-        "verification_required": True
-    },
-    
-    "financial_health_indicators": {
-        "focus": [
-            "companies_with_strong_balance_sheets_low_debt_equity",
-            "consistent_free_cash_flow_generation_past_4_quarters",
-            "revenue_growth_trends_from_quarterly_reports",
-            "market_capitalization_above_1B_for_liquidity"
-        ],
-        "sources": ["10K_filings", "10Q_filings", "financial_statements"],
-        "verification_required": True
-    },
-    
-    "index_changes_and_upgrades": {
-        "focus": [
-            "recent_additions_to_sp500_russell_indices_sector_etfs",
-            "analyst_upgrades_downgrades_major_investment_banks",
-            "credit_rating_changes_moodys_sp_fitch"
-        ],
-        "sources": ["index_provider_announcements", "analyst_research_summaries"],
-        "verification_required": True
-    },
-    
-    "sector_leadership_identification": {
-        "focus": [
-            "companies_with_dominant_market_positions",
-            "high_institutional_ownership_above_70_percent",
-            "consistent_dividend_payments_or_buyback_programs", 
-            "strong_competitive_moats_from_annual_reports"
-        ],
-        "sources": ["proxy_statements", "annual_reports", "industry_analysis"],
-        "verification_required": True
-    }
-}
+## RESEARCH CRITERIA - HIGH CONFIDENCE TASKS ONLY
 
-# =============================================================================
-# VERIFICATION REQUIREMENTS - CRITICAL CONSTRAINTS
-# =============================================================================
+### Recent Earnings Analysis (Past 30 Days)
+- Companies that reported earnings in last 30 days
+- Revenue/EPS beats or misses from earnings releases
+- Management guidance updates or outlook changes
+- Quarterly performance vs prior periods
+- **Sources:** Company earnings press releases, 10-Q filings, investor presentations
 
-VERIFICATION_REQUIREMENTS = {
-    "basic_eligibility": {
-        "stock_price": "above_20_dollars_per_share",
-        "market_cap": "above_1B_for_liquidity", 
-        "listing_status": "no_pending_bankruptcy_delisting_major_litigation",
-        "exchange": "primary_listing_nyse_or_nasdaq"
-    },
-    "source_verification": ["exchange_listings", "sec_filings", "court_records"],
-    "mandatory_constraints": [
-        "base_analysis_only_on_publicly_available_verifiable_sources",
-        "if_information_cannot_be_confirmed_state_information_not_available",
-        "include_confidence_level_high_medium_low_for_each_selection",
-        "cite_specific_sources_for_all_claims_sec_filing_dates_press_releases"
-    ],
-    "prohibited_claims": [
-        "real_time_stock_prices_or_options_chains",
-        "intraday_trading_volumes_or_technical_indicators", 
-        "proprietary_analyst_price_targets",
-        "forward_looking_earnings_beyond_company_guidance",
-        "insider_trading_activity_or_institutional_flow_data"
-    ]
-}
+### Corporate Development Events
+- Recent M&A announcements, spin-offs, major acquisitions
+- New product launches or market expansions
+- Executive leadership changes (CEO/CFO transitions)
+- Strategic partnerships or major contract wins
+- **Sources:** 8-K filings, company press releases, investor relations pages
 
-# =============================================================================
-# QUALITY_ASSURANCE_FILTERS
-# =============================================================================
+### Financial Health Indicators
+- Companies with strong balance sheets (low debt/equity)
+- Consistent free cash flow generation (past 4 quarters)
+- Revenue growth trends from quarterly reports
+- Market capitalization above $1B for liquidity
+- **Sources:** 10-K filings, 10-Q filings, financial statements
 
-QUALITY_ASSURANCE = {
-    "diversification_requirements": [
-        "ensure_at_least_8_different_sectors_represented",
-        "no_single_sector_should_exceed_40_percent_of_selections",
-        "include_mix_of_large_cap_above_50B_and_mid_cap_5B_to_50B",
-        "balance_growth_and_value_characteristics_where_possible"
-    ],
-    "recency_filters": [
-        "prioritize_companies_with_earnings_or_events_in_past_30_days",
-        "avoid_companies_with_stale_news_older_than_90_days",
-        "focus_on_actively_traded_names_with_recent_analyst_coverage"
-    ],
-    "risk_screening": [
-        "exclude_companies_under_regulatory_investigation",
-        "avoid_stocks_with_recent_accounting_irregularities",
-        "screen_out_companies_with_going_concern_audit_opinions",
-        "reject_tickers_with_pending_major_litigation_outcomes"
-    ]
-}
+### Index Changes and Upgrades
+- Recent additions to S&P 500, Russell indices, sector ETFs
+- Analyst upgrades/downgrades from major investment banks
+- Credit rating changes (Moody's, S&P, Fitch)
+- **Sources:** Index provider announcements, analyst research summaries
 
-# =============================================================================
-# OUTPUT FORMAT - COPY THIS STRUCTURE EXACTLY
-# =============================================================================
+### Sector Leadership Identification
+- Companies with dominant market positions
+- High institutional ownership (above 70%)
+- Consistent dividend payments or buyback programs
+- Strong competitive moats from annual reports
+- **Sources:** Proxy statements, annual reports, industry analysis
 
-# Monthly refresh script – Generated [TODAY'S_DATE]
-# Research period: [30_DAYS_AGO] to [TODAY'S_DATE]
+## VERIFICATION REQUIREMENTS - CRITICAL CONSTRAINTS
 
-OPTIMAL_45 = [
-    # Tier 1: Always liquid (15) – Core positions, never remove
-    "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
-    "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
-    
-    # Tier 2: Recent earnings/event driven (15) – Monthly rotation based on catalysts
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", 
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", 
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
-    
-    # Tier 3: Sector leaders (15) – Stable positions, change only on major events
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", 
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
-    "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER"
-]
+### Basic Eligibility
+- Stock price above $20 per share
+- Market cap above $1B for liquidity
+- No pending bankruptcy, delisting, or major litigation
+- Primary listing on NYSE or NASDAQ
 
-# AUTOMATIC SECTOR MAPPING - All new tickers with verified classifications
-TICKER_SECTOR_MAP_UPDATE = {
-    # Only include NEW tickers not in base mapping (exclude Tier 1)
-    # Base mapping covers: SPY, QQQ, IWM, AAPL, MSFT, NVDA, AMZN, META, GOOGL, TSLA, AMD, NFLX, JPM, BAC, XOM
-    
-    "REPLACE_WITH_ACTUAL_TICKER": "Information Technology",     # Based on GICS sector classification
-    "REPLACE_WITH_ACTUAL_TICKER": "Health Care",                # From company 10K business description  
-    "REPLACE_WITH_ACTUAL_TICKER": "Consumer Discretionary",     # Primary revenue source analysis
-    "REPLACE_WITH_ACTUAL_TICKER": "Financials",                 # SIC code verification
-    "REPLACE_WITH_ACTUAL_TICKER": "Energy",                     # Business segment breakdown
-    "REPLACE_WITH_ACTUAL_TICKER": "Communication Services",     # Revenue classification
-    "REPLACE_WITH_ACTUAL_TICKER": "Industrials",                # Primary business operations
-    "REPLACE_WITH_ACTUAL_TICKER": "Materials",                  # Manufacturing/production focus
-    "REPLACE_WITH_ACTUAL_TICKER": "Utilities",                  # Regulated utility operations
-    "REPLACE_WITH_ACTUAL_TICKER": "Consumer Staples",           # Defensive consumer products
-    # Continue for all 30 new tickers with actual symbols and verified sectors
-    
-    # GICS_SECTOR_CLASSIFICATIONS - Use these exact categories:
-    # "Information Technology" - software, semiconductors, hardware, IT services
-    # "Health Care" - pharmaceuticals, biotechnology, medical equipment, healthcare services
-    # "Financials" - banks, insurance, capital markets, fintech, REITs
-    # "Consumer Discretionary" - retail, media, restaurants, automobiles, luxury goods
-    # "Consumer Staples" - food products, beverages, household products, tobacco
-    # "Energy" - oil_gas, renewable energy, energy equipment_services
-    # "Communication Services" - telecommunications, media_entertainment, interactive media
-    # "Industrials" - aerospace, machinery, transportation, construction, defense
-    # "Materials" - chemicals, metals_mining, construction materials, packaging
-    # "Utilities" - electric, gas, water utilities, renewable energy utilities
-    # "Real Estate" - equity REITs, real estate management_development
-}
+### Mandatory Constraints
+- Base analysis ONLY on publicly available, verifiable sources
+- If information cannot be confirmed, state "Information not available"
+- Include confidence level (High/Medium/Low) for each selection
+- Cite specific sources for all claims (SEC filing dates, press release dates)
 
-# =============================================================================
-# RESEARCH_DOCUMENTATION_REQUIREMENTS
-# =============================================================================
+### Prohibited Claims
+- Real-time stock prices or options chains
+- Intraday trading volumes or technical indicators
+- Proprietary analyst price targets
+- Forward-looking earnings beyond company guidance
+- Insider trading activity or institutional flow data
 
-RESEARCH_DOCUMENTATION = {
-    "tier_2_tier_3_selections_must_include": [
-        "ticker_symbol",
-        "selection_rationale", # earnings_beat, index_addition, leadership_position, etc
-        "source_verification", # 10Q_filed_DATE, press_release_DATE, etc  
-        "sector_justification", # primary_revenue_source, GICS_classification, etc
-        "confidence_level" # High, Medium, Low
-    ],
-    "quality_standards": [
-        "all_30_new_tickers_verified_for_basic_eligibility", # above_20_dollars, above_1B_market_cap
-        "sector_allocation_based_on_GICS_classifications_or_SEC_business_descriptions",
-        "research_reasoning_must_cite_specific_verifiable_sources",
-        "ensure_geographic_and_sector_diversification_across_selections"
-    ]
-}
+## QUALITY ASSURANCE FILTERS
 
-# =============================================================================
-# EXECUTION_CHECKLIST
-# =============================================================================
+### Diversification Requirements
+- Ensure at least 8 different sectors represented
+- No single sector should exceed 40% of selections
+- Include mix of large-cap (above $50B) and mid-cap ($5B-$50B)
+- Balance growth and value characteristics where possible
 
-PRE_SUBMISSION_CHECKLIST = [
-    "verify_all_45_tickers_are_real_and_tradeable_symbols",
-    "confirm_no_tickers_under_20_dollars_or_1B_market_cap",
-    "ensure_sector_mapping_covers_all_30_new_tickers",
-    "check_that_confidence_levels_are_assigned_to_all_selections",
-    "validate_that_sources_are_specific_and_verifiable",
-    "confirm_diversification_requirements_are_met"
-]
+### Recency Filters
+- Prioritize companies with earnings or events in past 30 days
+- Avoid companies with stale news older than 90 days
+- Focus on actively traded names with recent analyst coverage
 
-EXECUTION_ORDER = [
-    "1_research_recent_earnings_and_corporate_events",
-    "2_identify_sector_leaders_and_financial_health_indicators", 
-    "3_verify_basic_eligibility_for_all_candidates",
-    "4_apply_risk_screening_and_diversification_requirements",
-    "5_generate_sector_mapping_with_gics_classifications",
-    "6_document_sources_and_confidence_levels",
-    "7_run_final_checklist_before_output"
-]
+### Risk Screening
+- Exclude companies under regulatory investigation
+- Avoid stocks with recent accounting irregularities
+- Screen out companies with going concern audit opinions
+- Reject tickers with pending major litigation outcomes
 
-# =============================================================================
-# EXECUTION INSTRUCTIONS
-# =============================================================================
+## OUTPUT FORMAT
 
-"""
-Replace all REPLACE_WITH_ACTUAL_TICKER placeholders with real ticker symbols.
-Include research documentation for each non-Tier-1 selection.
-Verify all sources and include confidence levels.
-Ensure sector mapping uses official GICS classifications.
-Execute checklist items in order before final submission.
-"""
+**Identify yourself and format accordingly:**
+- If you are ChatGPT/GPT-4, use variable name `OPTIMAL_45_GPT`
+- If you are Claude, use variable name `OPTIMAL_45_CLAUDE`
+- If you are Grok, use variable name `OPTIMAL_45_GROK`
 
-# =============================================================================
-# OUTPUT FORMATTING REQUIREMENT
-# =============================================================================
-
-"""
-CRITICAL: Format your entire response as a single Python code block using triple backticks.
-Start with ```python and end with ```.
-Do not include any explanatory text outside the code block.
-Make the output directly copy-pasteable into sectors.py.
-
-Example format:
 ```python
-# Your complete response here
-OPTIMAL_45 = [...]
-TICKER_SECTOR_MAP_UPDATE = {...}
-# Research documentation as comments
+# Monthly refresh script – Generated [TODAY'S DATE]
+# Research period: [30 DAYS AGO] to [TODAY'S DATE]
+# Generated by: [YOUR AI NAME - ChatGPT/Claude/Grok]
 
+OPTIMAL_45_[YOUR_AI_NAME] = [
+   # Tier 1: Always liquid (15) – Core positions, never remove
+   "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
+   "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
+   
+   # Tier 2: Recent earnings/event driven (15) – Monthly rotation based on catalysts
+   [15 ACTUAL TICKER SYMBOLS WITH RESEARCH RATIONALE],
+   
+   # Tier 3: Sector leaders (15) – Stable positions, change only on major events
+   [15 ACTUAL TICKER SYMBOLS WITH SECTOR LEADERSHIP JUSTIFICATION]
+]
+
+# AUTOMATIC SECTOR MAPPING - All new tickers with GICS classifications
+TICKER_SECTOR_MAP_UPDATE = {
+   # Only include the 30 NEW tickers (exclude Tier 1)
+   "TICKER1": "Information Technology",     # Software/semiconductors/hardware/IT services
+   "TICKER2": "Health Care",                # Pharma/biotech/medical equipment/healthcare
+   "TICKER3": "Consumer Discretionary",     # Retail/media/restaurants/autos/luxury
+   "TICKER4": "Financials",                 # Banks/insurance/capital markets/fintech/REITs
+   "TICKER5": "Energy",                     # Oil/gas/renewable energy/equipment
+   "TICKER6": "Communication Services",     # Telecom/media/entertainment/interactive
+   "TICKER7": "Industrials",                # Aerospace/machinery/transportation/defense
+   "TICKER8": "Materials",                  # Chemicals/metals/mining/construction materials
+   "TICKER9": "Utilities",                  # Electric/gas/water/renewable utilities
+   "TICKER10": "Consumer Staples",          # Food/beverages/household products/tobacco
+   "TICKER11": "Real Estate",               # REITs/real estate management
+   # Continue mapping all 30 new tickers to appropriate GICS sectors
+}
 ```
 
 ---
