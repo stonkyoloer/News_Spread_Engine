@@ -17,6 +17,7 @@ Work in Progress...
 
 ## ◽️ Instructions | Structure the Trading Portfolio
 
+<img width="1360" height="862" alt="45E961EC-ECAD-43F9-AF90-7A7254DAC70B" src="https://github.com/user-attachments/assets/6b89c510-6710-49c9-b6c3-e75f61b94ddd" />
 
 ```python
 # OUTPUT EXPECTED:
