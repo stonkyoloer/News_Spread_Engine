@@ -156,7 +156,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 
 ---
 
-# 🛠 Set Tastytrade Credentials
+# 🛠 Setup Tastytrade Credentials
 
 **`config.py`** Stores API URL and login credentials, imported and used by other scripts.
 
