@@ -1,12 +1,14 @@
-# Credit Spread Screener 
+# 🌎 Credit Spread Screener 
 
 Work in Progress...  
 
-1. Start with 9 sectors and scan for catalysts across earnings, filings, flows, sentiment, ratings, volatility, support/resistance, and relative strength. GPT-5 and Grok select the top 3 tickers per sector, 27 tickers total. 
+1. Start with 9 sectors and scan for catalysts across earnings, filings, flows, sentiment, ratings.
 
-2. Scripts pulls live market data from the tastytrade server, and uses Black-Scholes to get PoP and ROI. 
+2. GPT-5 and Grok select the top 45; each. 
 
-3. GPT-5 and Grok link news and events to each spread, producing entry and exit plans.
+3. Scripts pulls live market data from the tastytrade server, and uses Black-Scholes to get PoP and ROI. 
+
+4. GPT-5 and Grok link news and events to each spread, producing entry and exit plans.
 
 
 **Need a tool or automation for your project? Hit me up, and I’ll build it: stuart.alexander.phi@icloud.com**
@@ -184,21 +186,32 @@ python3 spread_analyzer.py
 python3 master.py
 ```
 
-## ▪️ `sectors.py` Sets tickers for querying.
+---
 
-## ▪️ `build_universe.py` Tests tickers for options chains.
+## ▪️ Run `sectors.py` Sets tickers for querying.
+
+## ▪️ Run `build_universe.py` Tests tickers for options chains.
 ![60C434B5-DFAC-4E9E-B048-8507D7BDEA9E_4_5005_c](https://github.com/user-attachments/assets/a9fc8090-742e-4598-9e25-6f32a3bd832f)
 
-## ▪️ `spot.py` Fetches current stock prices for strikes.
+## ▪️ Run `spot.py` Fetches current stock prices for strikes.
 ![7C22BE39-82C0-4438-95D1-732ABB5696EB_4_5005_c](https://github.com/user-attachments/assets/7dcf130c-bedc-4590-a9cf-f8a9f595ada6)
 
-## ▪️ `ticker_ranker.py` Ranks stocks by options liquidity.
+## ▪️ Run `ticker_ranker.py` Ranks stocks by options liquidity.
+![23E886D2-CC47-4463-A115-5CBC1EC2DF78_4_5005_c](https://github.com/user-attachments/assets/48eed902-c9bf-42f9-a9a6-b32913656ae5)
 
-## ▪️ `options_chains.py` Downloads option contracts for spreads.
+## ▪️ Run `options_chains.py` Downloads option contracts for spreads.
+![643B4579-31A7-46E8-9001-7B48B98DA684_4_5005_c](https://github.com/user-attachments/assets/1f61f824-3a2c-477e-a32d-f9e59b5b8002)
 
-## ▪️ `greeks.py` Gets option prices and Greeks for PoP/ROI.
+## ▪️ Run `greeks.py` Gets option prices and Greeks for PoP/ROI.
+![775EAF1B-B076-4675-A230-F220EA0E90FA_4_5005_c](https://github.com/user-attachments/assets/3e1ae114-3af4-4dc8-a185-a18cb600e9b1)
 
-## ▪️ `spread_analyzer.py` Builds spreads, calculates PoP/ROI, picks best.
+## ▪️ Run `spread_analyzer.py` Builds spreads, calculates PoP/ROI, picks best.
+![630A7258-6D00-4777-81A1-6A6F9CCBC977_4_5005_c](https://github.com/user-attachments/assets/67c46624-79a6-48b5-8e88-f8ed27637c74)
+
+---
+
+## ▪️ Run `master.py`
+<img width="901" height="524" alt="D4F660FE-D30F-43DE-8797-44EC3239E386" src="https://github.com/user-attachments/assets/a6becac3-2309-4129-bce4-86c2edada464" />
 
 ---
 
