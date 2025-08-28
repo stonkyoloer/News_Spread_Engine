@@ -151,10 +151,6 @@ TICKER_SECTOR_MAP_UPDATE = {
 - Screen for publicly disclosed major litigation milestones in the next 30 days; flag and deprioritize/exclude.
 ```
 
-## ◽️ Run
-
-<img width="1366" height="864" alt="B4AB3130-1DA4-48EB-B397-59B5EDC8854E" src="https://github.com/user-attachments/assets/6715acae-1d1b-40a0-89a4-6d4b2de6a776" />
-
 
 ## ◽️ Output | Defines the Trading Portfolio
 
@@ -373,7 +369,7 @@ Base_Score = PoP + (ROI_capped × 0.35) + (Distance_Buffer × 8) + DTE_bonus + W
 **Quality Standard:** Each recommendation must include specific entry criteria, profit targets, stop losses, and position sizing guidance based on real options data provided.
 ```
 
-## ◽️ Output | Defines Trade Type, Legs, DTE, Entry and Exit Plans
+## ◽️ Output | Defines Trade Type, DTE, Entry and Exit Plans
 <img width="1112" height="833" alt="8C171937-47F5-4BEB-B389-A269F3FF64A3" src="https://github.com/user-attachments/assets/09a47a10-866d-4579-8f44-debca4926d58" />
 
 <img width="1063" height="832" alt="62889D1F-30D9-4051-BFF4-A43677475724" src="https://github.com/user-attachments/assets/3c96da64-d350-4cf9-866d-9165ab71d5b9" />
