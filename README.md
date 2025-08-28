@@ -112,13 +112,37 @@ VERIFICATION_REQUIREMENTS = {
 }
 
 # =============================================================================
+# QUALITY_ASSURANCE_FILTERS
+# =============================================================================
+
+QUALITY_ASSURANCE = {
+    "diversification_requirements": [
+        "ensure_at_least_8_different_sectors_represented",
+        "no_single_sector_should_exceed_40_percent_of_selections",
+        "include_mix_of_large_cap_above_50B_and_mid_cap_5B_to_50B",
+        "balance_growth_and_value_characteristics_where_possible"
+    ],
+    "recency_filters": [
+        "prioritize_companies_with_earnings_or_events_in_past_30_days",
+        "avoid_companies_with_stale_news_older_than_90_days",
+        "focus_on_actively_traded_names_with_recent_analyst_coverage"
+    ],
+    "risk_screening": [
+        "exclude_companies_under_regulatory_investigation",
+        "avoid_stocks_with_recent_accounting_irregularities",
+        "screen_out_companies_with_going_concern_audit_opinions",
+        "reject_tickers_with_pending_major_litigation_outcomes"
+    ]
+}
+
+# =============================================================================
 # OUTPUT FORMAT - COPY THIS STRUCTURE EXACTLY
 # =============================================================================
 
 # Monthly refresh script – Generated [TODAY'S_DATE]
 # Research period: [30_DAYS_AGO] to [TODAY'S_DATE]
 
-OPTIMAL_45_GPT = [
+OPTIMAL_45 = [
     # Tier 1: Always liquid (15) – Core positions, never remove
     "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
     "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
@@ -136,26 +160,6 @@ OPTIMAL_45_GPT = [
     "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
     "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER",
     "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER", "REPLACE_WITH_ACTUAL_TICKER"
-]
-
-OPTIMAL_45_GROK = [
-    # Tier 1: Always liquid (15) – Core positions, never remove
-    "SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN", "META", 
-    "GOOGL", "TSLA", "AMD", "NFLX", "JPM", "BAC", "XOM",
-    
-    # Tier 2: Recent earnings/event driven (15) – Monthly rotation based on catalysts
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", 
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
-    
-    # Tier 3: Sector leaders (15) – Stable positions, change only on major events  
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", 
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT",
-    "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT", "DIFFERENT_SELECTION_FROM_GPT"
 ]
 
 # AUTOMATIC SECTOR MAPPING - All new tickers with verified classifications
@@ -190,7 +194,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 }
 
 # =============================================================================
-# RESEARCH DOCUMENTATION REQUIREMENTS
+# RESEARCH_DOCUMENTATION_REQUIREMENTS
 # =============================================================================
 
 RESEARCH_DOCUMENTATION = {
@@ -205,9 +209,32 @@ RESEARCH_DOCUMENTATION = {
         "all_30_new_tickers_verified_for_basic_eligibility", # above_20_dollars, above_1B_market_cap
         "sector_allocation_based_on_GICS_classifications_or_SEC_business_descriptions",
         "research_reasoning_must_cite_specific_verifiable_sources",
-        "gpt_and_grok_selections_differ_by_at_least_10_tickers"
+        "ensure_geographic_and_sector_diversification_across_selections"
     ]
 }
+
+# =============================================================================
+# EXECUTION_CHECKLIST
+# =============================================================================
+
+PRE_SUBMISSION_CHECKLIST = [
+    "verify_all_45_tickers_are_real_and_tradeable_symbols",
+    "confirm_no_tickers_under_20_dollars_or_1B_market_cap",
+    "ensure_sector_mapping_covers_all_30_new_tickers",
+    "check_that_confidence_levels_are_assigned_to_all_selections",
+    "validate_that_sources_are_specific_and_verifiable",
+    "confirm_diversification_requirements_are_met"
+]
+
+EXECUTION_ORDER = [
+    "1_research_recent_earnings_and_corporate_events",
+    "2_identify_sector_leaders_and_financial_health_indicators", 
+    "3_verify_basic_eligibility_for_all_candidates",
+    "4_apply_risk_screening_and_diversification_requirements",
+    "5_generate_sector_mapping_with_gics_classifications",
+    "6_document_sources_and_confidence_levels",
+    "7_run_final_checklist_before_output"
+]
 
 # =============================================================================
 # EXECUTION INSTRUCTIONS
@@ -215,11 +242,29 @@ RESEARCH_DOCUMENTATION = {
 
 """
 Replace all REPLACE_WITH_ACTUAL_TICKER placeholders with real ticker symbols.
-Replace all DIFFERENT_SELECTION_FROM_GPT with tickers different from GPT list.
 Include research documentation for each non-Tier-1 selection.
 Verify all sources and include confidence levels.
 Ensure sector mapping uses official GICS classifications.
+Execute checklist items in order before final submission.
 """
+
+# =============================================================================
+# OUTPUT FORMATTING REQUIREMENT
+# =============================================================================
+
+"""
+CRITICAL: Format your entire response as a single Python code block using triple backticks.
+Start with ```python and end with ```.
+Do not include any explanatory text outside the code block.
+Make the output directly copy-pasteable into sectors.py.
+
+Example format:
+```python
+# Your complete response here
+OPTIMAL_45 = [...]
+TICKER_SECTOR_MAP_UPDATE = {...}
+# Research documentation as comments
+
 ```
 
 ---
