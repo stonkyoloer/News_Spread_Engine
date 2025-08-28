@@ -220,14 +220,12 @@ python3 master.py
 
 ## ▪️ Prompt for Report with Catalyst Heat, Bias, and Trade Plan.
 
-
-### ◽️ GROK 4 & ChatGPT 5 (input)
 ```python
 # Credit Spread Analysis & Trade Ranking Prompt
 
 You are analyzing real credit spread opportunities with live options data. Your task is to score, rank, and generate actionable trade plans from the algorithm output.
 
-## FOUNDATION (9 Analysis Points)
+## FOUNDATION (Analysis Points)
 
 1. **Risk-Reward Validation:** Calculate R:R = Net_Credit / (Width - Net_Credit). Require R:R ≥ 0.33 minimum for inclusion.
 
@@ -247,7 +245,7 @@ You are analyzing real credit spread opportunities with live options data. Your 
 
 9. **Liquidity Inference:** Favor large-cap tickers (GOOGL, JPM, UNH over smaller names) and standard strike intervals for better fills.
 
-## PROCESS (6 Execution Steps)
+## PROCESS (Execution Steps)
 
 **1. Data Validation & Cleaning:**
 - Verify all numeric fields are properly formatted
@@ -289,9 +287,9 @@ Base_Score = PoP + (ROI_capped × 0.35) + (Distance_Buffer × 8) + DTE_bonus + W
 
 **1. Ranked Trade Table:**
 
-| Rank | Ticker | Type       | Strikes    | DTE | PoP   | ROI | Action | Risk Level | Exit Plan                                                            |
-|------|--------|------------|------------|-----|-------|-----|--------|------------|----------------------------------------------------------------------|
-| 1    | JPM    |  Bear Cal  | $300/$305  | 25  | 55.4% | 77% |  ENTER | GREEN      | Entery Price (stock Price), Stop Loss (limit), Target Profit (limit) |
+| Rank | Ticker | Type       | Strikes    | DTE | PoP   | ROI | Action | Risk Level | Exit Plan                                                            | Justification      |
+|------|--------|------------|------------|-----|-------|-----|--------|------------|----------------------------------------------------------------------|--------------------|
+| 1    | JPM    |  Bear Cal  | $300/$305  | 25  | 55.4% | 77% |  ENTER | GREEN      | Entery Price (stock Price), Stop Loss (limit), Target Profit (limit) | Top Analysis Points|
 
 
 **2. Portfolio Allocation Plan:**
@@ -369,3 +367,6 @@ Base_Score = PoP + (ROI_capped × 0.35) + (Distance_Buffer × 8) + DTE_bonus + W
 
 **Quality Standard:** Each recommendation must include specific entry criteria, profit targets, stop losses, and position sizing guidance based on real options data provided.
 ```
+
+## ◽️ Output | Defines Tradee Type, Legs, DTE, Entry and Exit Plans
+
