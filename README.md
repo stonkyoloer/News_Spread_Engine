@@ -219,7 +219,10 @@ python3 master.py
 
 # 💯 Generate Strategy and Game Plan
 
-## ▪️ Prompt for Report with Catalyst Heat, Bias, and Trade Plan.
+## ◽️ Attach `final_credit_spread_comparison.json`
+<img width="1675" height="850" alt="256C507C-7CF3-4470-A948-6195537ABA78" src="https://github.com/user-attachments/assets/9d74eaca-161f-4e81-a880-b22b0930a354" />
+
+## ◽️ Prompt for Report with Catalyst Heat, Bias, and Trade Plan.
 <img width="1919" height="931" alt="2E4698B3-A153-4202-ADE3-E1766857971C" src="https://github.com/user-attachments/assets/df2a10f3-ab1e-4a01-9dd9-dd91069c0054" />
 
 ```python
