@@ -189,6 +189,7 @@ python3 master.py
 ---
 
 ## ▪️ Run `sectors.py` Sets tickers for querying.
+<img width="402" height="805" alt="0620A54B-235B-4CFD-B8D5-FE6C6A0CDF4B" src="https://github.com/user-attachments/assets/a87f1ec4-acd3-488e-b9a6-c870d2b65f81" />
 
 ## ▪️ Run `build_universe.py` Tests tickers for options chains.
 ![60C434B5-DFAC-4E9E-B048-8507D7BDEA9E_4_5005_c](https://github.com/user-attachments/assets/a9fc8090-742e-4598-9e25-6f32a3bd832f)
