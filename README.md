@@ -13,6 +13,12 @@ Work in Progress...
 
 ---
 
+# 🛠 Setup Tastytrade Credentials
+
+**`config.py`** Stores API URL and login credentials, imported and used by other scripts.
+
+---
+
 # 🪐 FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
 
 ## ◽️ Instructions | Structure the Trading Portfolio
@@ -156,11 +162,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 
 ---
 
-# 🛠 Setup Tastytrade Credentials
 
-**`config.py`** Stores API URL and login credentials, imported and used by other scripts.
-
----
 
 # 🤖 Analyze Credit Spreads via Pipeline
 
