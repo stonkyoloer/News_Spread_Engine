@@ -289,9 +289,9 @@ Base_Score = PoP + (ROI_capped × 0.35) + (Distance_Buffer × 8) + DTE_bonus + W
 
 **1. Ranked Trade Table:**
 
-| Rank | Ticker | Type | Strikes | DTE | PoP | ROI | R:R | Buffer | Score | Action | Risk Level |
-|------|--------|------|---------|-----|-----|-----|-----|--------|-------|--------|------------|
-| 1    | JPM    | Bear Call | $300/$305 | 25 | 55.4% | 77.0% | 0.77 | 1.6% | 89.2 | ENTER | GREEN |
+| Rank | Ticker | Type | Strikes | DTE | PoP | ROI | Action | Risk Level |
+|------|--------|------|---------|-----|-----|-----|-----|--------|-------
+| 1    | JPM    | Bear Call | $300/$305 | 25 | 55.4% | ENTER | GREEN |
 
 
 **2. Portfolio Allocation Plan:**
