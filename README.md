@@ -159,12 +159,10 @@ TICKER_SECTOR_MAP_UPDATE = {
 <img width="1361" height="864" alt="93FB656F-09C1-48B6-95E9-55A94EA28194" src="https://github.com/user-attachments/assets/2cf2fcb4-936d-485d-a358-ca9dbb4a60c9" />
 
 
-
 ---
 
 
-
-# 🤖 CREDIT SPREAD API PIPELINE
+# 🤖 FINANCIAL DATA PIPELINE
 
 ## ▪️ How to Execute 
 
@@ -186,14 +184,19 @@ python3 spread_analyzer.py
 python3 master.py
 ```
 
----
-
 ## ▪️ `sectors.py` Sets tickers for querying.
+<img width="367" height="803" alt="BA74954C-D85C-40AB-81A9-31E7F4B3CEC6" src="https://github.com/user-attachments/assets/ab0c1e9c-16e9-40b6-8f3a-6f8d1f47f647" />
+
 ## ▪️ `build_universe.py` Tests tickers for options chains.
+
 ## ▪️ `spot.py` Fetches current stock prices for strikes.
+
 ## ▪️ `ticker_ranker.py` Ranks stocks by options liquidity.
+
 ## ▪️ `options_chains.py` Downloads option contracts for spreads.
+
 ## ▪️ `greeks.py` Gets option prices and Greeks for PoP/ROI.
+
 ## ▪️ `spread_analyzer.py` Builds spreads, calculates PoP/ROI, picks best.
 
 ---
