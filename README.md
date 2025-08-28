@@ -219,6 +219,7 @@ python3 master.py
 # 💯 Generate Strategy and Game Plan
 
 ## ▪️ Prompt for Report with Catalyst Heat, Bias, and Trade Plan.
+<img width="1919" height="931" alt="2E4698B3-A153-4202-ADE3-E1766857971C" src="https://github.com/user-attachments/assets/df2a10f3-ab1e-4a01-9dd9-dd91069c0054" />
 
 ```python
 # Credit Spread Analysis & Trade Ranking Prompt
