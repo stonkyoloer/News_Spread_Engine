@@ -164,7 +164,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 
 
 
-# 🤖 Analyze Credit Spreads via Pipeline
+# 🤖 Credit Spread Pipeline
 
 ## ▪️ How to Execute 
 
@@ -173,25 +173,25 @@ Run `individual steps` or use the `master pipeline`
 ```python
 # Individual steps:
 
-# `sectors.py` Sets tickers for querying.
+
 python3 sectors.py
 
-# `build_universe.py` Tests tickers for options chains.
+
 python3 build_universe.py
 
-# `spot.py` Fetches current stock prices for strikes.
+
 python3 spot.py
 
-# `ticker_ranker.py` Ranks stocks by options liquidity.
+
 python3 ticker_ranker.py
 
-# `options_chains.py` Downloads option contracts for spreads.
+
 python3 options_chains.py
 
-# `greeks.py` Gets option prices and Greeks for PoP/ROI.
+
 python3 greeks.py
 
-# `spread_analyzer.py` Builds spreads, calculates PoP/ROI, picks best.
+
 python3 spread_analyzer.py
 
 
@@ -200,10 +200,15 @@ python3 spread_analyzer.py
 python3 master.py
 ```
 
+---
 
-
-
-
+## ▪️ `sectors.py` Sets tickers for querying.
+## ▪️ `build_universe.py` Tests tickers for options chains.
+## ▪️ `spot.py` Fetches current stock prices for strikes.
+## ▪️ `ticker_ranker.py` Ranks stocks by options liquidity.
+## ▪️ `options_chains.py` Downloads option contracts for spreads.
+## ▪️ `greeks.py` Gets option prices and Greeks for PoP/ROI.
+## ▪️ `spread_analyzer.py` Builds spreads, calculates PoP/ROI, picks best.
 
 ---
 
