@@ -1,7 +1,7 @@
-# build_universe.py - Optimized Universe Builder
+# build_universe.py - Complete Universe Builder
 """
-KEEP - optimize for 20min runtime target.
-Validates options chains with early exit at 95% success.
+FIXED - Processes ALL tickers for complete data collection.
+Removed early exit optimization to ensure 100% ticker coverage.
 """
 import json
 import time
@@ -14,8 +14,8 @@ from sectors import get_sectors, alias_candidates, PORTFOLIO_MODE, PerfTimer
 
 BUILD_MODES = ["gpt", "grok"]
 
-def validate_chain_fast(sess, sym, timeout=3):
-    """Fast chain validation with timeout"""
+def validate_chain_complete(sess, sym, timeout=5):
+    """Complete chain validation - processes all aliases"""
     start_time = time.time()
     
     for alias in alias_candidates(sym):
@@ -34,8 +34,8 @@ def validate_chain_fast(sess, sym, timeout=3):
     print(f"  ⚠️ {sym} -> NO CHAIN")
     return None
 
-def build_universe_optimized(sess, mode):
-    """Build universe with optimized validation"""
+def build_universe_complete(sess, mode):
+    """Build universe with complete validation - NO EARLY EXIT"""
     print(f"\n🔨 Building {mode.upper()} universe...")
     
     with PerfTimer(f"{mode.upper()} universe build"):
@@ -51,13 +51,13 @@ def build_universe_optimized(sess, mode):
                 all_tickers.append(ticker)
                 ticker_to_sector[ticker] = sector
         
-        print(f"📋 Validating {len(all_tickers)} tickers...")
+        print(f"📋 Validating ALL {len(all_tickers)} tickers...")
         
-        # Process with early exit
+        # Process EVERY ticker - no early exit
         for i, ticker in enumerate(all_tickers, 1):
             print(f"[{i}/{len(all_tickers)}] {ticker}:")
             
-            validated_alias = validate_chain_fast(sess, ticker)
+            validated_alias = validate_chain_complete(sess, ticker)
             
             record = {
                 "ticker": validated_alias or ticker,
@@ -71,15 +71,14 @@ def build_universe_optimized(sess, mode):
             else:
                 failed_tickers.append(record)
             
-            # Early exit at 95% if we have enough
-            success_rate = len(validated_tickers) / i
-            if i >= 20 and success_rate >= 0.95:
-                print(f"🚀 Early exit at 95% success rate ({i} processed)")
-                break
+            # Show progress every 10 tickers
+            if i % 10 == 0:
+                success_rate = len(validated_tickers) / i * 100
+                print(f"  📊 Progress: {i}/{len(all_tickers)} ({success_rate:.1f}% success)")
     
     all_results = validated_tickers + failed_tickers
     
-    print(f"📊 Results: {len(validated_tickers)} OK, {len(failed_tickers)} failed")
+    print(f"📊 COMPLETE Results: {len(validated_tickers)} OK, {len(failed_tickers)} failed")
     if failed_tickers:
         failed_symbols = [f["requested"] for f in failed_tickers]
         print(f"❌ Failed: {failed_symbols}")
@@ -87,15 +86,15 @@ def build_universe_optimized(sess, mode):
     return all_results
 
 def main():
-    """Main universe builder"""
+    """Main universe builder - COMPLETE DATA COLLECTION"""
     start_time = time.time()
-    print("🚀 Optimized Universe Builder")
-    print(f"📅 Target: 20min runtime | Mode: {PORTFOLIO_MODE}")
+    print("🚀 Complete Universe Builder - NO EARLY EXIT")
+    print(f"📅 Processing ALL tickers for complete data | Mode: {PORTFOLIO_MODE}")
     
     sess = Session(USERNAME, PASSWORD)
     
     for mode in BUILD_MODES:
-        results = build_universe_optimized(sess, mode)
+        results = build_universe_complete(sess, mode)
         
         # Save results
         filename = f"universe_{mode}.json"
