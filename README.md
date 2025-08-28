@@ -59,10 +59,12 @@ TICKER_SECTOR_MAP_UPDATE = {
 
 ```python
 # FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
-
+**Instructions:** Refer to instructions tab for output expected.
 **Task:** Generate 45-ticker credit spread universe with automatic sector allocation
 **Focus:** Publicly verifiable information only (SEC filings, earnings reports, company announcements)
+
 ---
+
 # RESEARCH CRITERIA - HIGH CONFIDENCE TASKS ONLY
 ## Recent Earnings Analysis (Past 30 Days)
 - Identify companies that reported earnings in the last 30 days (exact date).
@@ -82,8 +84,8 @@ TICKER_SECTOR_MAP_UPDATE = {
 - Market capitalization ≥ $1B (as of the research date; cite source and date).
 - Share price ≥ $20 at the last market close (cite source and date).
 - Evidence of free cash flow generation over the last 4 quarters (from filings/IR).
-Report leverage metrics from filings (e.g., debt/equity or net debt/EBITDA) with citations.
-Sources: 10-K, 10-Q, audited financial statements, investor presentations.
+- Report leverage metrics from filings (e.g., debt/equity or net debt/EBITDA) with citations.
+- Sources: 10-K, 10-Q, audited financial statements, investor presentations.
 
 ## Index, Ratings, and Analyst Headlines
 - Recent S&P 500 or Russell additions/deletions where formally announced.
