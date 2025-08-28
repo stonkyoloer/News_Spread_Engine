@@ -55,7 +55,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 }
 ```
 
-## ◽️ Prompt Input | Screen for News, Events, Indicators & Ratings
+## ◽️ Prompt | Screen for News, Events, Indicators & Ratings
 
 <img width="1362" height="863" alt="D45A1EDF-13A8-4C0F-BE63-DC04E078D07B" src="https://github.com/user-attachments/assets/dd84fa9a-1a18-46f2-a121-a7362db4ba12" />
 
