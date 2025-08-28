@@ -15,7 +15,7 @@ Work in Progress...
 
 # 🪐 FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
 
-## ◽️ Instructions | Structure the Trading Portfolio
+## ◽️ Add Instructions | Structure the Trading Portfolio
 
 <img width="1360" height="862" alt="45E961EC-ECAD-43F9-AF90-7A7254DAC70B" src="https://github.com/user-attachments/assets/6b89c510-6710-49c9-b6c3-e75f61b94ddd" />
 
@@ -55,7 +55,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 }
 ```
 
-## ◽️ Prompt | Screen for News, Events, Indicators & Ratings
+## ◽️ Enter Prompt | Screen for News, Events, Indicators & Ratings
 
 <img width="1362" height="863" alt="D45A1EDF-13A8-4C0F-BE63-DC04E078D07B" src="https://github.com/user-attachments/assets/dd84fa9a-1a18-46f2-a121-a7362db4ba12" />
 
@@ -143,7 +143,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 - Screen for publicly disclosed major litigation milestones in the next 30 days; flag and deprioritize/exclude.
 ```
 
-## ◽️ Run Prompt
+## ◽️ Prompt Runs
 
 <img width="1366" height="864" alt="B4AB3130-1DA4-48EB-B397-59B5EDC8854E" src="https://github.com/user-attachments/assets/6715acae-1d1b-40a0-89a4-6d4b2de6a776" />
 
