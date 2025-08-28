@@ -185,11 +185,12 @@ python3 master.py
 ```
 
 ## ▪️ `sectors.py` Sets tickers for querying.
-<img width="367" height="803" alt="BA74954C-D85C-40AB-81A9-31E7F4B3CEC6" src="https://github.com/user-attachments/assets/ab0c1e9c-16e9-40b6-8f3a-6f8d1f47f647" />
 
 ## ▪️ `build_universe.py` Tests tickers for options chains.
+![60C434B5-DFAC-4E9E-B048-8507D7BDEA9E_4_5005_c](https://github.com/user-attachments/assets/a9fc8090-742e-4598-9e25-6f32a3bd832f)
 
 ## ▪️ `spot.py` Fetches current stock prices for strikes.
+![7C22BE39-82C0-4438-95D1-732ABB5696EB_4_5005_c](https://github.com/user-attachments/assets/7dcf130c-bedc-4590-a9cf-f8a9f595ada6)
 
 ## ▪️ `ticker_ranker.py` Ranks stocks by options liquidity.
 
