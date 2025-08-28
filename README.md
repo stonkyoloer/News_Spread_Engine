@@ -55,7 +55,9 @@ TICKER_SECTOR_MAP_UPDATE = {
 }
 ```
 
-## ◽️ Prompt | Screen for News, Events, Indicators & Ratings
+## ◽️ Prompt Input | Screen for News, Events, Indicators & Ratings
+
+<img width="1362" height="863" alt="D45A1EDF-13A8-4C0F-BE63-DC04E078D07B" src="https://github.com/user-attachments/assets/dd84fa9a-1a18-46f2-a121-a7362db4ba12" />
 
 
 ```python
@@ -141,6 +143,14 @@ TICKER_SECTOR_MAP_UPDATE = {
 - Screen for publicly disclosed major litigation milestones in the next 30 days; flag and deprioritize/exclude.
 ```
 
+## ◽️ Prompt In-Progress... | Deep Research
+
+<img width="1366" height="864" alt="B4AB3130-1DA4-48EB-B397-59B5EDC8854E" src="https://github.com/user-attachments/assets/6715acae-1d1b-40a0-89a4-6d4b2de6a776" />
+
+
+## ◽️ Prompt Output | Define the Trading Portfolio
+
+<img width="1361" height="864" alt="93FB656F-09C1-48B6-95E9-55A94EA28194" src="https://github.com/user-attachments/assets/2cf2fcb4-936d-485d-a358-ca9dbb4a60c9" />
 
 
 
