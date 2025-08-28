@@ -15,7 +15,7 @@ Work in Progress...
 
 # 🪐 FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
 
-## ◽️ Instructions | Define a 45 Ticker Trading Portfolio
+## ◽️ Instructions | Structure the Trading Portfolio
 
 
 ```python
@@ -54,7 +54,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 }
 ```
 
-## ◽️ Prompt | Screen for News and Events 
+## ◽️ Prompt | Screen for News, Events, Indicators & Ratings
 
 
 ```python
