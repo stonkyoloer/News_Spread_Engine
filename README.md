@@ -19,7 +19,7 @@ Work in Progress...
 
 ---
 
-# 🪐 FINANCIAL MARKETS RESEARCH ASSISTANT PROMPT
+# 🪐 FINANCIAL MARKET RESEARCH PROMPT
 
 ## ◽️ Instructions | Structure the Trading Portfolio
 
@@ -164,7 +164,7 @@ TICKER_SECTOR_MAP_UPDATE = {
 
 
 
-# 🤖 Credit Spread Pipeline
+# 🤖 CREDIT SPREAD API PIPELINE
 
 ## ▪️ How to Execute 
 
@@ -173,27 +173,13 @@ Run `individual steps` or use the `master pipeline`
 ```python
 # Individual steps:
 
-
 python3 sectors.py
-
-
 python3 build_universe.py
-
-
 python3 spot.py
-
-
 python3 ticker_ranker.py
-
-
 python3 options_chains.py
-
-
 python3 greeks.py
-
-
 python3 spread_analyzer.py
-
 
 # OR run everything at once:
 
