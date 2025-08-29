@@ -149,6 +149,11 @@ TICKER_SECTOR_MAP_UPDATE = {
 - Screen filings/news for publicly disclosed regulatory investigations; flag/exclude if confirmed.
 - Screen for publicly disclosed accounting irregularities; exclude if confirmed.
 - Screen for publicly disclosed major litigation milestones in the next 30 days; flag and deprioritize/exclude.
+
+# Output
+- Python Script 45 tickers.
+- Notes
+- Citations
 ```
 
 
