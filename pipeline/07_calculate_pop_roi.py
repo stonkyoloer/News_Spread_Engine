@@ -18,26 +18,27 @@ def load_spreads():
         print("❌ spreads.json not found - run calculate_spreads.py first")
         sys.exit(1)
 
-def black_scholes_pop(stock_price, strike, dte, iv, spread_type):
+def black_scholes_pop(stock_price, strike, net_credit, dte, iv, spread_type):
     """Calculate real PoP using Black-Scholes"""
     if dte <= 0 or iv <= 0:
         return 0
+    
+    if spread_type == "Bear Call":
+        breakeven = strike + net_credit
+        d2_sign = -1
+    else:  # Bull Put
+        breakeven = strike - net_credit
+        d2_sign = 1
     
     T = dte / 365.0
     r = 0.05  # Risk-free rate
     
     # Calculate d2
-    d1 = (math.log(stock_price / strike) + (r + 0.5 * iv**2) * T) / (iv * math.sqrt(T))
+    iv = iv/100
+    d1 = (math.log(stock_price / breakeven) + (r + 0.5 * iv**2) * T) / (iv * math.sqrt(T))
     d2 = d1 - iv * math.sqrt(T)
     
-    if spread_type == "Bear Call":
-        # Probability stock stays BELOW short strike
-        pop = norm.cdf(-d2) * 100
-    else:  # Bull Put
-        # Probability stock stays ABOVE short strike
-        pop = norm.cdf(d2) * 100
-    
-    return pop
+    return norm.cdf(d2_sign * d2) * 100
 
 def calculate_all_pops():
     """Calculate PoP for all spreads"""
@@ -51,6 +52,7 @@ def calculate_all_pops():
         pop = black_scholes_pop(
             spread["stock_price"],
             spread["short_strike"],
+            spread["net_credit"],
             spread["expiration"]["dte"],
             spread["short_iv"],
             spread["type"]
