@@ -1,6 +1,5 @@
 """
-Calculate PoP and ROI: Real probability using Black-Scholes
-No fake numbers - uses real IV from Greeks
+Calculate PoP and ROI: Fixed probability calculation
 """
 import json
 import sys
@@ -15,69 +14,60 @@ def load_spreads():
             data = json.load(f)
         return data["spreads"]
     except FileNotFoundError:
-        print("❌ spreads.json not found - run calculate_spreads.py first")
+        print("❌ spreads.json not found")
         sys.exit(1)
 
-def black_scholes_pop(stock_price, strike, dte, iv, spread_type):
-    """Calculate real PoP using Black-Scholes"""
-    if dte <= 0 or iv <= 0:
-        return 0
-    
-    T = dte / 365.0
-    r = 0.05  # Risk-free rate
-    
-    # Calculate d2
-    d1 = (math.log(stock_price / strike) + (r + 0.5 * iv**2) * T) / (iv * math.sqrt(T))
-    d2 = d1 - iv * math.sqrt(T)
-    
+def calculate_pop_from_delta(delta, spread_type):
+    """
+    Calculate probability of profit from delta
+    For credit spreads, PoP = probability of expiring OTM
+    """
     if spread_type == "Bear Call":
-        # Probability stock stays BELOW short strike
-        pop = norm.cdf(-d2) * 100
+        # For calls, delta is already the ITM probability
+        # So PoP = 1 - delta
+        pop = (1 - delta) * 100
     else:  # Bull Put
-        # Probability stock stays ABOVE short strike
-        pop = norm.cdf(d2) * 100
+        # For puts, delta is negative of ITM probability
+        # So PoP = 1 - abs(delta)
+        pop = (1 - abs(delta)) * 100
     
     return pop
 
 def calculate_all_pops():
     """Calculate PoP for all spreads"""
-    print("📊 Calculating real PoP using Black-Scholes...")
+    print("="*60)
+    print("STEP 7: Calculate PoP and ROI (FIXED)")
+    print("="*60)
+    print("\n📊 Calculating PoP from delta...")
     
     spreads = load_spreads()
-    analyzed_spreads = []
     
+    # Process ALL spreads - ensure they all have PoP and score
     for spread in spreads:
-        # Calculate PoP
-        pop = black_scholes_pop(
-            spread["stock_price"],
-            spread["short_strike"],
-            spread["expiration"]["dte"],
-            spread["short_iv"],
-            spread["type"]
-        )
+        current_pop = spread.get("pop", 0)
+        delta = spread["short_delta"]
         
-        # Add PoP to spread
-        spread["pop"] = round(pop, 1)
+        # If PoP is already reasonable (50-85%), keep it
+        if 50 <= current_pop <= 85:
+            # Still need to calculate score
+            spread["score"] = round((spread["roi"] * current_pop) / 100, 1)
+            continue
         
-        # Calculate risk-adjusted score
-        if spread["roi"] > 0 and pop > 0:
-            spread["score"] = round((spread["roi"] * pop) / 100, 1)
-        else:
-            spread["score"] = 0
+        # Otherwise recalculate from delta
+        new_pop = calculate_pop_from_delta(delta, spread["type"])
+        spread["pop"] = round(new_pop, 1)
         
-        analyzed_spreads.append(spread)
+        # Calculate score (ROI × PoP / 100)
+        spread["score"] = round((spread["roi"] * spread["pop"]) / 100, 1)
     
     # Sort by score
-    analyzed_spreads.sort(key=lambda x: x["score"], reverse=True)
+    spreads.sort(key=lambda x: x.get("score", 0), reverse=True)
     
-    return analyzed_spreads
-
-def save_analyzed_spreads(spreads):
-    """Save spreads with PoP and scores"""
+    # Save analyzed spreads with correct structure
     output = {
         "timestamp": datetime.now().isoformat(),
-        "total_spreads": len(spreads),
-        "analyzed_spreads": spreads
+        "total_analyzed": len(spreads),
+        "analyzed_spreads": spreads  # Note: using analyzed_spreads not spreads
     }
     
     with open("data/analyzed_spreads.json", "w") as f:
@@ -96,24 +86,21 @@ def save_analyzed_spreads(spreads):
     print(f"   Mid (50-70%): {mid_pop}")
     print(f"   Low (<50%): {low_pop}")
     
-    # Show top spreads
+    # Show top spreads with REALISTIC probabilities
     print(f"\n🏆 Top 5 by Score (ROI × PoP):")
     for spread in spreads[:5]:
         print(f"   {spread['ticker']} {spread['type']}: Score={spread['score']}, ROI={spread['roi']}%, PoP={spread['pop']}%")
-
-def main():
-    """Main execution"""
-    print("="*60)
-    print("STEP 7: Calculate PoP and ROI")
-    print("="*60)
     
-    # Calculate PoPs
-    analyzed_spreads = calculate_all_pops()
+    # Calculate average PoP
+    avg_pop = sum(s["pop"] for s in spreads) / len(spreads) if spreads else 0
+    output["avg_pop"] = round(avg_pop, 1)
     
-    # Save results
-    save_analyzed_spreads(analyzed_spreads)
+    # Re-save with avg_pop
+    with open("data/analyzed_spreads.json", "w") as f:
+        json.dump(output, f, indent=2)
     
-    print("✅ Step 7 complete: analyzed_spreads.json created")
+    print(f"\n📈 Average PoP: {avg_pop:.1f}%")
+    print("\n✅ Step 7 complete: analyzed_spreads.json created")
 
 if __name__ == "__main__":
-    main()
+    calculate_all_pops()

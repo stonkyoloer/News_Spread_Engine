@@ -1,0 +1,185 @@
+{
+  "timestamp": "2025-09-11T23:51:50.031610",
+  "requested": 22,
+  "success": 22,
+  "failed": 0,
+  "prices": {
+    "JNJ": {
+      "ticker": "JNJ",
+      "bid": 174.04,
+      "ask": 182.57,
+      "mid": 178.31,
+      "spread": 8.53,
+      "timestamp": "2025-09-11T23:51:39.746942"
+    },
+    "APD": {
+      "ticker": "APD",
+      "bid": 291.75,
+      "ask": 366.74,
+      "mid": 329.25,
+      "spread": 74.99,
+      "timestamp": "2025-09-11T23:51:39.747082"
+    },
+    "PLD": {
+      "ticker": "PLD",
+      "bid": 115.0,
+      "ask": 115.5,
+      "mid": 115.25,
+      "spread": 0.5,
+      "timestamp": "2025-09-11T23:51:39.747140"
+    },
+    "WMT": {
+      "ticker": "WMT",
+      "bid": 100.19,
+      "ask": 104.43,
+      "mid": 102.31,
+      "spread": 4.24,
+      "timestamp": "2025-09-11T23:51:39.747183"
+    },
+    "UNH": {
+      "ticker": "UNH",
+      "bid": 355.01,
+      "ask": 355.41,
+      "mid": 355.21,
+      "spread": 0.4,
+      "timestamp": "2025-09-11T23:51:49.925926"
+    },
+    "XOM": {
+      "ticker": "XOM",
+      "bid": 109.27,
+      "ask": 114.19,
+      "mid": 111.73,
+      "spread": 4.92,
+      "timestamp": "2025-09-11T23:51:39.747272"
+    },
+    "GOOGL": {
+      "ticker": "GOOGL",
+      "bid": 239.36,
+      "ask": 239.79,
+      "mid": 239.57,
+      "spread": 0.43,
+      "timestamp": "2025-09-11T23:51:49.642299"
+    },
+    "AMZN": {
+      "ticker": "AMZN",
+      "bid": 229.8,
+      "ask": 229.89,
+      "mid": 229.84,
+      "spread": 0.09,
+      "timestamp": "2025-09-11T23:51:44.498892"
+    },
+    "PG": {
+      "ticker": "PG",
+      "bid": 154.44,
+      "ask": 162.17,
+      "mid": 158.31,
+      "spread": 7.73,
+      "timestamp": "2025-09-11T23:51:43.494569"
+    },
+    "CVX": {
+      "ticker": "CVX",
+      "bid": 156.96,
+      "ask": 158.5,
+      "mid": 157.73,
+      "spread": 1.54,
+      "timestamp": "2025-09-11T23:51:44.498992"
+    },
+    "BA": {
+      "ticker": "BA",
+      "bid": 221.02,
+      "ask": 221.39,
+      "mid": 221.2,
+      "spread": 0.37,
+      "timestamp": "2025-09-11T23:51:39.747465"
+    },
+    "NEE": {
+      "ticker": "NEE",
+      "bid": 69.77,
+      "ask": 72.67,
+      "mid": 71.22,
+      "spread": 2.9,
+      "timestamp": "2025-09-11T23:51:39.747503"
+    },
+    "SO": {
+      "ticker": "SO",
+      "bid": 84.19,
+      "ask": 100.13,
+      "mid": 92.16,
+      "spread": 15.94,
+      "timestamp": "2025-09-11T23:51:39.747547"
+    },
+    "MSFT": {
+      "ticker": "MSFT",
+      "bid": 508.0,
+      "ask": 508.26,
+      "mid": 508.13,
+      "spread": 0.26,
+      "timestamp": "2025-09-11T23:51:49.642459"
+    },
+    "JPM": {
+      "ticker": "JPM",
+      "bid": 298.15,
+      "ask": 305.85,
+      "mid": 302.0,
+      "spread": 7.7,
+      "timestamp": "2025-09-11T23:51:39.993010"
+    },
+    "BAC": {
+      "ticker": "BAC",
+      "bid": 50.6,
+      "ask": 50.88,
+      "mid": 50.74,
+      "spread": 0.28,
+      "timestamp": "2025-09-11T23:51:39.747660"
+    },
+    "CAT": {
+      "ticker": "CAT",
+      "bid": 431.28,
+      "ask": 433.68,
+      "mid": 432.48,
+      "spread": 2.4,
+      "timestamp": "2025-09-11T23:51:39.747701"
+    },
+    "AAPL": {
+      "ticker": "AAPL",
+      "bid": 229.73,
+      "ask": 229.84,
+      "mid": 229.78,
+      "spread": 0.11,
+      "timestamp": "2025-09-11T23:51:44.502557"
+    },
+    "TSLA": {
+      "ticker": "TSLA",
+      "bid": 370.87,
+      "ask": 370.98,
+      "mid": 370.93,
+      "spread": 0.11,
+      "timestamp": "2025-09-11T23:51:46.034658"
+    },
+    "LIN": {
+      "ticker": "LIN",
+      "bid": 476.83,
+      "ask": 487.92,
+      "mid": 482.38,
+      "spread": 11.09,
+      "timestamp": "2025-09-11T23:51:39.747814"
+    },
+    "AMT": {
+      "ticker": "AMT",
+      "bid": 194.01,
+      "ask": 198.62,
+      "mid": 196.31,
+      "spread": 4.61,
+      "timestamp": "2025-09-11T23:51:39.747850"
+    },
+    "META": {
+      "ticker": "META",
+      "bid": 751.07,
+      "ask": 751.37,
+      "mid": 751.22,
+      "spread": 0.3,
+      "timestamp": "2025-09-11T23:51:47.058763"
+    }
+  },
+  "missing_tickers": []
+}

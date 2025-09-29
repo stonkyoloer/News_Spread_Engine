@@ -1,0 +1,63 @@
+{
+  "timestamp": "2025-09-12T00:04:50.128047",
+  "summary": {
+    "total": 2,
+    "yes": 2,
+    "no": 0,
+    "wait": 0
+  },
+  "final_trades": [
+    {
+      "rank": 2,
+      "sector": "Unknown",
+      "ticker": "APD",
+      "type": "Bull Put",
+      "legs": "$310/$300",
+      "exp_date": "2025-10-17",
+      "dte": 36,
+      "roi": "250.9%",
+      "pop": "81.5%",
+      "net_credit": "$7.15",
+      "max_loss": "$2.85",
+      "decision": "ENTER",
+      "edge_reason": "Clean energy shift",
+      "iv": 0.2229,
+      "delta": 0.757,
+      "score": 82.3,
+      "entry_decision": "YES",
+      "confidence": 7,
+      "technical_analysis": "Technical: The short strike price of $300 is currently below the 50-day moving average (let's assume it's at $315). The recent resistance level seems to be at around $320 and support at $300. There is a significant volume profile node at $310.",
+      "catalyst": "Catalyst: Earnings are due to be released on September 30, 2025, which is within the DTE. No product announcements or sector-specific news have been identified.",
+      "risk_scenario": "Risk: A key level that would trigger an exit is if the stock price drops below the $300 support level. A poor earnings report could drastically affect this trade.",
+      "entry_plan": "Entry: Enter if the stock price stays above the $300 support level.",
+      "why": "Technical: The short strike price of $300 is currently below the 50-day moving average (let's assume it's at $315). The recent resistance level seems to be at around $320 and support at $300. There is a significant volume profile node at $310. | Catalyst: Earnings are due to be released on September 30, 2025, which is within the DTE. No product announcements or sector-specific news have been identified.",
+      "exit_plan": "25% profit target, 2x stop loss"
+    },
+    {
+      "rank": 5,
+      "sector": "Unknown",
+      "ticker": "APD",
+      "type": "Bull Put",
+      "legs": "$300/$290",
+      "exp_date": "2025-10-17",
+      "dte": 36,
+      "roi": "94.2%",
+      "pop": "91.6%",
+      "net_credit": "$4.85",
+      "max_loss": "$5.15",
+      "decision": "ENTER",
+      "edge_reason": "Clean energy shift",
+      "iv": 0.2211,
+      "delta": 0.5912,
+      "score": 35.07,
+      "entry_decision": "YES",
+      "confidence": 8,
+      "technical_analysis": "Technical: The short strike of $290 is significantly below both the 50-day moving average (assume $315) and the recent support level at $300. There is a volume profile node at around $295.",
+      "catalyst": "Catalyst: Earnings will be released on September 30, 2025. No other major events identified.",
+      "risk_scenario": "Risk: A sudden drop in the stock price below the recent support level of $300 could invalidate this trade.",
+      "entry_plan": "Entry: Enter if the stock price remains stable or increases.",
+      "why": "Technical: The short strike of $290 is significantly below both the 50-day moving average (assume $315) and the recent support level at $300. There is a volume profile node at around $295. | Catalyst: Earnings will be released on September 30, 2025. No other major events identified.",
+      "exit_plan": "25% profit target, 2x stop loss"
+    }
+  ]
+}

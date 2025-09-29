@@ -1,0 +1,25 @@
+Select EXACTLY 22 stocks optimized for credit spread trading based on historical characteristics.
+
+SELECTION CRITERIA:
+1. LIQUIDITY - Choose stocks known for highly liquid options markets
+2. PRICE RANGE - Prefer stocks typically trading $50-$500 for optimal strike spacing  
+3. SECTOR DIVERSITY - Maximum 3 stocks per sector, cover all 11 S&P sectors
+4. VOLATILITY PROFILE - Mix of:
+   - Stable dividend stocks (lower IV but consistent)
+   - Growth tech names (higher IV when sector rotates)
+   - Cyclical industrials (IV spikes on macro events)
+5. OPTIONS AVAILABILITY - Only stocks with weekly options
+6. MARKET CAP - Focus on large caps ($50B+) for stability
+
+REQUIRED OUTPUT FORMAT:
+STOCKS = [list of exactly 22 ticker symbols]
+EDGE_REASON = {
+  "TICKER": "SECTOR - why this stock's options are good for spreads"
+}
+
+Example reasons:
+- "XLF - bank with wide strikes and earnings volatility"
+- "XLK - tech leader with weekly liquidity"
+- "XLE - energy with commodity-driven IV"
+
+NO IMPORTS. NO OTHER CODE. ONLY THE TWO VARIABLES.
